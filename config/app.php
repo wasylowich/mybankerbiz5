@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Mybankerbiz\Providers\AppServiceProvider::class,
+        Mybankerbiz\Providers\AuthServiceProvider::class,
+        // Mybankerbiz\Providers\BroadcastServiceProvider::class,
+        Mybankerbiz\Providers\EventServiceProvider::class,
+        Mybankerbiz\Providers\RouteServiceProvider::class,
 
     ],
 

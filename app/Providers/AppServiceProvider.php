@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Mybankerbiz\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

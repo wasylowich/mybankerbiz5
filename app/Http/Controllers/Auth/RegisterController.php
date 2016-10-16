@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Mybankerbiz\Http\Controllers\Auth;
 
-use App\User;
+use Mybankerbiz\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Mybankerbiz\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
