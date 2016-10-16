@@ -2,8 +2,9 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        <a href="https://github.com/acacha/adminlte-laravel"></a><b>admin-lte-laravel</b></a>. {{ trans('adminlte_lang::message.descriptionpackage') }}
+        <a href="#">Forretningsbetingelser</a> | <a href="#">Persondatapolitik</a>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015 <a href="http://acacha.org">Acacha.org</a>.</strong> {{ trans('adminlte_lang::message.createdby') }} <a href="http://acacha.org/sergitur">Sergi Tur Badenas</a>. {{ trans('adminlte_lang::message.seecode') }} <a href="https://github.com/acacha/adminlte-laravel">Github</a>
+    <strong>Copyright &copy; <a href="http://mybanker.dk">Mybanker.dk A/S</a>,</strong> Amaliegade 36, 1256 København K.<br />
+    Tlf. +45 70 20 72 34, e-mail: info@mybanker.biz, CVR-nr. 30504496
 </footer>

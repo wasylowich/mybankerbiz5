@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Admin Interface Routes
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function ()
+{
+    Route::resource('currencies', 'CurrenciesController');
+});
