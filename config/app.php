@@ -168,6 +168,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +232,7 @@ return [
          */
         'Form'         => Collective\Html\FormFacade::class,
         'AdminLTE'     => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+        'Debugbar'     => Barryvdh\Debugbar\Facade::class,
 
     ],
 
