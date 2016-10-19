@@ -27,7 +27,7 @@ class CurrenciesController extends BaseAdminController
     public function index()
     {
         // $currencies = $this->currency->withTrashed()->paginate(10);
-        $currencies = $this->currency->paginate(7);
+        $currencies = $this->currency->withTrashed()->get();
         // $currencies = $this->currency->all();
 
         return view('admin.currencies.index', compact('currencies'));
