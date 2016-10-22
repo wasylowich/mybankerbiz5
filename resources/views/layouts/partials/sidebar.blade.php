@@ -43,6 +43,15 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="{!! Request::is('admin/users*') ? 'active' : '' !!}"><a href="{{ url('admin/users') }}"><i class="fa fa-user"></i> Users</a></li>
+                    <li class="{!! Request::is('admin/roles*') ? 'active' : '' !!}"><a href="{{ url('admin/roles') }}"><i class="fa fa-group"></i> Roles</a></li>
+                    <li class="{!! Request::is('admin/permissions*') ? 'active' : '' !!}"><a href="{{ url('admin/permissions') }}"><i class="fa fa-key"></i> Permissions</a></li>
+                </ul>
+            </li>
+
             <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}"><a href="{{ url('admin/currencies') }}"><i class="fa fa-file-o"></i> <span>Currencies</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
