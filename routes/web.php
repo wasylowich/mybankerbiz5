@@ -25,4 +25,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
+
+    Route::resource('bankTypes', 'BankTypesController');
+    Route::resource('interestConventions', 'InterestConventionsController');
+    Route::resource('interestTerms', 'InterestTermsController');
+    Route::resource('banks', 'BanksController');
 });
