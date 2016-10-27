@@ -73,7 +73,9 @@ class BanksController extends BaseAdminController
                 'interest_convention_id',
                 'interest_term_id',
                 'pension_interest_convention_id',
+                'change_of_control',
                 'rebate_type_id',
+                'rebate_message',
             ])
         );
 
@@ -133,7 +135,9 @@ class BanksController extends BaseAdminController
                 'interest_convention_id',
                 'interest_term_id',
                 'pension_interest_convention_id',
+                'change_of_control',
                 'rebate_type_id',
+                'rebate_message',
             ])
         )->save();
 

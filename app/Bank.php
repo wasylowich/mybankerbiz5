@@ -26,7 +26,9 @@ class Bank extends BaseModel
         'interest_convention_id',
         'interest_term_id',
         'pension_interest_convention_id',
+        'change_of_control',
         'rebate_type_id',
+        'rebate_message',
     ];
 
     /**
@@ -42,7 +44,8 @@ class Bank extends BaseModel
      * @var array
      */
     protected $casts = [
-        'is_active'  => 'boolean',
+        'is_active'         => 'boolean',
+        'change_of_control' => 'boolean',
     ];
 
     /**
@@ -215,6 +218,17 @@ class Bank extends BaseModel
     }
 
     /**
+     * Mutate the change_of_control attribute
+     *
+     * @param  bool $changeOfControl
+     * @return void
+     */
+    public function setChangeOfControlAttribute($changeOfControl)
+    {
+        $this->attributes['change_of_control'] = (bool) $changeOfControl;
+    }
+
+    /**
      * Mutate the is_active attribute
      *
      * @param  bool $isActive
@@ -228,12 +242,23 @@ class Bank extends BaseModel
     /**
      * Mutate the status attribute
      *
-     * @param  bool $isActive
+     * @param  bool $status
      * @return void
      */
     public function setStatusAttribute($status)
     {
         $this->attributes['is_active'] = (bool) $status;
+    }
+
+    /**
+     * Mutate the rebate_message attribute
+     *
+     * @param  string $rebateMessage
+     * @return void
+     */
+    public function setRebateMessageAttribute($rebateMessage)
+    {
+        $this->attributes['rebate_message'] = trim($rebateMessage);
     }
 
     /*
@@ -276,6 +301,16 @@ class Bank extends BaseModel
     }
 
     /**
+     * Get the change_of_control flag
+     *
+     * @return boolean
+     */
+    public function getChangeOfControl()
+    {
+        return (bool) $this->change_of_control;
+    }
+
+    /**
      * Get the is_active flag
      *
      * @return boolean
@@ -283,6 +318,16 @@ class Bank extends BaseModel
     public function getIsActive()
     {
         return (bool) $this->is_active;
+    }
+
+    /**
+     * Get the rebate_message
+     *
+     * @return string
+     */
+    public function getRebateMessage()
+    {
+        return $this->rebate_message;
     }
 
     /*
@@ -341,7 +386,18 @@ class Bank extends BaseModel
     }
 
     /**
-     * Set the is_actve flag
+     * Set the change_of_control flag
+     *
+     * @param  bool|int $changeOfControl
+     * @return void
+     */
+    public function setChangeOfControl($changeOfControl)
+    {
+        $this->change_of_control = (bool) $changeOfControl;
+    }
+
+    /**
+     * Set the is_active flag
      *
      * @param  bool|int $isActive
      * @return void
@@ -360,5 +416,16 @@ class Bank extends BaseModel
     public function setStatus($status)
     {
         $this->status = (bool) $status;
+    }
+
+    /**
+     * Set the rebate_message
+     *
+     * @param  string $rebateMessage
+     * @return void
+     */
+    public function setRebateMessage($rebateMessage)
+    {
+        $this->rebate_message = $rebateMessage;
     }
 }

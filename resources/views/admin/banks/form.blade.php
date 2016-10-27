@@ -156,6 +156,13 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        <label>
+                            {!! Form::checkbox('change_of_control', null, $bank->change_of_control) !!}
+                            Change of control
+                        </label>
+                    </div>
+
                     <div class="form-group{{ $errors->has('rebate_type_id') ? ' has-error' : '' }}">
                         {!! Form::label('rebate_type_id', 'RebateType') !!}
                         {!! Form::select(
@@ -173,6 +180,11 @@
                                 <strong>{{ $errors->first('rebate_type_id') }}</strong>
                             </span>
                         @endif
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('rebate_message', 'RebateMessage') !!}
+                        {!! Form::textarea('rebate_message', null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="col-xs-12">
