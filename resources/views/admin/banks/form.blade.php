@@ -32,6 +32,25 @@
                         @endif
                     </div>
 
+                    <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
+                        {!! Form::label('country_id', 'Country') !!}
+                        {!! Form::select(
+                                'country_id',
+                                $countries->pluck('name', 'id'),
+                                null,
+                                array(
+                                    'placeholder' => 'Select a Country',
+                                    'class'       => 'form-control'
+                                )
+                            ) !!}
+
+                        @if ($errors->has('country_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('country_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="form-group{{ $errors->has('vatin') ? ' has-error' : '' }}">
                         {!! Form::label('vatin', 'CVR') !!}
                         {!! Form::text('vatin', null, ['class' => 'form-control']) !!}
@@ -56,7 +75,7 @@
 
                     <div class="form-group">
                         <label>
-                            {!! Form::checkbox('status', null, $bank->is_active) !!}
+                            {!! Form::checkbox('is_active', null, $bank->is_active) !!}
                             Active
                         </label>
                     </div>

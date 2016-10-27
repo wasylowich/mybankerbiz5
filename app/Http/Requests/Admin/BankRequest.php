@@ -48,16 +48,28 @@ class BankRequest extends FormRequest
             case 'POST':
                 return [
                     // 'country_id' => 'exists:countries,id,deleted_at,NULL',
-                    'name'  => 'required|min:3',
-                    'vatin' => 'digits:8',
+                    'name'                           => 'required|min:3',
+                    'country_id'                     => 'required|exists:countries,id,deleted_at,NULL',
+                    'vatin'                          => 'required|digits:8',
+                    'bank_type_id'                   => 'required|exists:bank_types,id,deleted_at,NULL',
+                    'interest_convention_id'         => 'required|exists:interest_conventions,id,deleted_at,NULL',
+                    'interest_term_id'               => 'required|exists:interest_terms,id,deleted_at,NULL',
+                    'pension_interest_convention_id' => 'required|exists:interest_conventions,id,deleted_at,NULL',
+                    'rebate_type_id'                 => 'required|exists:rebate_types,id,deleted_at,NULL',
                 ];
 
             case 'PUT':
             case 'PATCH':
                 return [
                     // 'country_id' => 'exists:countries,id,deleted_at,NULL',
-                    'name'  => 'required|min:3',
-                    'vatin' => 'digits:8',
+                    'name'                           => 'required|min:3',
+                    'country_id'                     => 'required|exists:countries,id,deleted_at,NULL',
+                    'vatin'                          => 'required|digits:8',
+                    'bank_type_id'                   => 'required|exists:bank_types,id,deleted_at,NULL',
+                    'interest_convention_id'         => 'required|exists:interest_conventions,id,deleted_at,NULL',
+                    'interest_term_id'               => 'required|exists:interest_terms,id,deleted_at,NULL',
+                    'pension_interest_convention_id' => 'required|exists:interest_conventions,id,deleted_at,NULL',
+                    'rebate_type_id'                 => 'required|exists:rebate_types,id,deleted_at,NULL',
                 ];
 
             default:

@@ -5,6 +5,7 @@ namespace Mybankerbiz\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use Mybankerbiz\Bank;
+use Mybankerbiz\Country;
 use Mybankerbiz\BankType;
 use Mybankerbiz\InterestConvention;
 use Mybankerbiz\InterestTerm;
@@ -44,12 +45,13 @@ class BanksController extends BaseAdminController
      */
     public function create(Bank $bank)
     {
+        $countries           = Country::all();
         $bankTypes           = BankType::all();
         $interestConventions = InterestConvention::all();
         $interestTerms       = InterestTerm::all();
         $rebateTypes         = RebateType::all();
 
-        return view('admin.banks.form', compact('bank', 'bankTypes', 'interestConventions', 'interestTerms', 'rebateTypes'));
+        return view('admin.banks.form', compact('bank', 'countries', 'bankTypes', 'interestConventions', 'interestTerms', 'rebateTypes'));
     }
 
     /**
@@ -63,9 +65,10 @@ class BanksController extends BaseAdminController
         $bank = $this->bank->create(
             $request->only([
                 'name',
+                'country_id',
                 'vatin',
                 'website',
-                'status',
+                'is_active',
                 'bank_type_id',
                 'interest_convention_id',
                 'interest_term_id',
@@ -99,12 +102,13 @@ class BanksController extends BaseAdminController
     public function edit($id)
     {
         $bank                = $this->bank->findOrFail($id);
+        $countries           = Country::all();
         $bankTypes           = BankType::all();
         $interestConventions = InterestConvention::all();
         $interestTerms       = InterestTerm::all();
         $rebateTypes         = RebateType::all();
 
-        return view('admin.banks.form', compact('bank', 'bankTypes', 'interestConventions', 'interestTerms', 'rebateTypes'));
+        return view('admin.banks.form', compact('bank', 'countries', 'bankTypes', 'interestConventions', 'interestTerms', 'rebateTypes'));
     }
 
     /**
@@ -121,9 +125,10 @@ class BanksController extends BaseAdminController
         $bank->fill(
             $request->only([
                 'name',
+                'country_id',
                 'vatin',
                 'website',
-                'status',
+                'is_active',
                 'bank_type_id',
                 'interest_convention_id',
                 'interest_term_id',

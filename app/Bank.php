@@ -18,6 +18,7 @@ class Bank extends BaseModel
      */
     protected $fillable = [
         'name',
+        'country_id',
         'vatin',
         'website',
         'is_active',
