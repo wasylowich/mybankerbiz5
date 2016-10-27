@@ -52,7 +52,17 @@
                 </ul>
             </li>
 
-            <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}"><a href="{{ url('admin/currencies') }}"><i class="fa fa-file-o"></i> <span>Currencies</span></a></li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-bank"></i> <span>Banks & Resources</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="{!! Request::is('admin/bankTypes*') ? 'active' : '' !!}"><a href="{{ url('admin/bankTypes') }}"><i class="fa fa-calculator"></i> BankTypes</a></li>
+                    <li class="{!! Request::is('admin/interestConventions*') ? 'active' : '' !!}"><a href="{{ url('admin/interestConventions') }}"><i class="fa fa-sliders"></i> InterestConventions</a></li>
+                    <li class="{!! Request::is('admin/interestTerms*') ? 'active' : '' !!}"><a href="{{ url('admin/interestTerms') }}"><i class="fa fa-book"></i> InterestTerms</a></li>
+                    <li class="{!! Request::is('admin/banks*') ? 'active' : '' !!}"><a href="{{ url('admin/banks') }}"><i class="fa fa-bank"></i> Banks</a></li>
+                </ul>
+            </li>
+
+            <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}"><a href="{{ url('admin/currencies') }}"><i class="fa fa-money"></i> <span>Currencies</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
