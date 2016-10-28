@@ -21,6 +21,9 @@ Route::get('/logout', 'Auth\LoginController@logout');
 // Admin Interface Routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function ()
 {
+    Route::post('countries/{country}/toggleEnabled', ['as' => 'countries.toggleEnabled', 'uses' => 'CountriesController@toggleEnabled']);
+    Route::get('countries/disabled', ['as' => 'countries.disabled', 'uses' => 'CountriesController@disabled']);
+    Route::resource('countries', 'CountriesController');
     Route::resource('currencies', 'CurrenciesController');
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');

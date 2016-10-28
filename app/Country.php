@@ -24,6 +24,8 @@ class Country extends BaseModel
         'iso_alpha_3',
         'telephone_code',
         'tld',
+        'is_enabled',
+        'default_currency_id',
     ];
 
     /**
@@ -38,7 +40,9 @@ class Country extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'is_enabled' => 'boolean',
+    ];
 
     /**
      * The attributes that should be cast to Carbon objects.
@@ -56,6 +60,18 @@ class Country extends BaseModel
     |
     */
 
+    /**
+     * Toggle the value of the is_enabled attribute
+     *
+     * @return \Mybankerbiz\Country
+     */
+    public function toggleEnabled()
+    {
+        $this->setIsEnabled(!$this->is_enabled);
+
+        return $this;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Relation Methods
@@ -70,7 +86,7 @@ class Country extends BaseModel
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function currency()
+    public function defaultCurrency()
     {
         return $this->belongsTo(Currency::class);
     }
@@ -94,6 +110,28 @@ class Country extends BaseModel
     |
     */
 
+    /**
+    * Filters on enabled countries.
+    *
+    * @param  Illuminate\Database\Eloquent\Builder $builder
+    * @return Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeEnabled($builder)
+    {
+        return $builder->whereIsEnabled(true);
+    }
+
+    /**
+    * Filters on disabled countries.
+    *
+    * @param  Illuminate\Database\Eloquent\Builder $builder
+    * @return Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeDisabled($builder)
+    {
+        return $builder->whereIsEnabled(false);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Accessors
@@ -102,6 +140,20 @@ class Country extends BaseModel
     | Define all model attribute accessors here
     |
     */
+
+    /**
+     * Get the status of the client
+     *
+     * @return string
+     */
+    public function getStatusAttribute()
+    {
+        if (!is_null($this->deleted_at)) {
+            return 'deleted';
+        }
+
+        return $this->is_enabled ? 'enabled' : 'disabled';
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -189,6 +241,28 @@ class Country extends BaseModel
         $this->attributes['tld'] = trim($tld);
     }
 
+    /**
+     * Mutate the is_enabled attribute
+     *
+     * @param  bool $isEnabled
+     * @return void
+     */
+    public function setIsEnabledAttribute($isEnabled)
+    {
+        $this->attributes['is_enabled'] = (bool) $isEnabled;
+    }
+
+    /**
+     * Mutate the status attribute
+     *
+     * @param  bool $status
+     * @return void
+     */
+    public function setStatusAttribute($status)
+    {
+        $this->attributes['is_enabled'] = (bool) $status;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Getters
@@ -268,6 +342,16 @@ class Country extends BaseModel
         return $this->tld;
     }
 
+    /**
+     * Get the is_enabled flag
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return (bool) $this->is_enabled;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Setters
@@ -278,16 +362,16 @@ class Country extends BaseModel
     */
 
     /**
-     * Set the currency_id
+     * Set the default_currency_id
      *
-     * @param  int|\App\Currency $currency
+     * @param  int|\App\Currency $defaultCurrency
      * @return void
      */
-    public function setCurrency($currency)
+    public function setDefaultCurrency($defaultCurrency)
     {
-        $this->currency_id = is_a($currency, Currency::class)
-            ? $currency->getId()
-            : $currency;
+        $this->default_currency_id = is_a($defaultCurrency, Currency::class)
+            ? $defaultCurrency->getId()
+            : $defaultCurrency;
     }
 
     /**
@@ -365,5 +449,27 @@ class Country extends BaseModel
     public function setTld($tld)
     {
         $this->tld = $tld;
+    }
+
+    /**
+     * Set the is_enabled flag
+     *
+     * @param  bool|int $isEnabled
+     * @return void
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->is_enabled = (bool) $isEnabled;
+    }
+
+    /**
+     * Set the status
+     *
+     * @param  bool|int $status
+     * @return void
+     */
+    public function setStatus($status)
+    {
+        $this->status = (bool) $status;
     }
 }

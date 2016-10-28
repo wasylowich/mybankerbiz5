@@ -14,7 +14,7 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('currency_id')->unsigned();
+            $table->integer('default_currency_id')->unsigned();
             $table->string('name', 255);
             $table->string('local_short_form', 255);
             $table->string('abbreviation', 50);
@@ -22,10 +22,11 @@ class CreateCountriesTable extends Migration
             $table->char('iso_alpha_3', 3);
             $table->string('telephone_code', 10);
             $table->string('tld', 6);
+            $table->boolean('is_enabled')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('default_currency_id')->references('id')->on('currencies');
         });
     }
 
