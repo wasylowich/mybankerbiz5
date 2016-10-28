@@ -16,6 +16,7 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'Danish Krone',
                 'code'       => 'DKK',
                 'precision'  => 2,
+                'is_enabled' => true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'deleted_at' => null,
@@ -26,9 +27,10 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'Norwegian Krone',
                 'code'       => 'NOK',
                 'precision'  => 2,
+                'is_enabled' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-                'deleted_at' => Carbon::now(),
+                'deleted_at' => null,
             ),
 
             array(
@@ -36,9 +38,10 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'Swedish Krone',
                 'code'       => 'SEK',
                 'precision'  => 2,
+                'is_enabled' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-                'deleted_at' => Carbon::now(),
+                'deleted_at' => null,
             ),
 
             array(
@@ -46,9 +49,10 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'Pound Sterling',
                 'code'       => 'GBP',
                 'precision'  => 2,
+                'is_enabled' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-                'deleted_at' => Carbon::now(),
+                'deleted_at' => null,
             ),
 
             array(
@@ -56,9 +60,10 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'US Dollar',
                 'code'       => 'USD',
                 'precision'  => 2,
+                'is_enabled' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-                'deleted_at' => Carbon::now(),
+                'deleted_at' => null,
             ),
 
             array(
@@ -66,9 +71,10 @@ class CurrenciesTableSeeder extends Seeder
                 'name'       => 'Euro',
                 'code'       => 'EUR',
                 'precision'  => 2,
+                'is_enabled' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-                'deleted_at' => Carbon::now(),
+                'deleted_at' => null,
             )
         );
 

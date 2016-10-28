@@ -142,7 +142,7 @@ class Country extends BaseModel
     */
 
     /**
-     * Get the status of the client
+     * Get the status of the country
      *
      * @return string
      */

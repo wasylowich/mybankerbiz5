@@ -19,18 +19,19 @@ class CurrenciesController extends BaseAdminController
 
         parent::__construct();
     }
+
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $currencies = $this->currency->withTrashed()->paginate(10);
-        $currencies = $this->currency->withTrashed()->get();
-        // $currencies = $this->currency->all();
+        $currencies = $this->currency->enabled()->get();
+        $path       = $request->path();
 
-        return view('admin.currencies.index', compact('currencies'));
+        return view('admin.currencies.index', compact('currencies', 'path'));
     }
 
     /**
@@ -40,7 +41,6 @@ class CurrenciesController extends BaseAdminController
      */
     public function create(Currency $currency)
     {
-
         return view('admin.currencies.form', compact('currency'));
     }
 
@@ -52,7 +52,14 @@ class CurrenciesController extends BaseAdminController
      */
     public function store(CurrencyRequest $request)
     {
-        $currency = $this->currency->create($request->only('name', 'code', 'precision'));
+        $currency = $this->currency->create(
+            $request->only([
+                'name',
+                'code',
+                'precision',
+                'is_enabled',
+            ])
+        );
 
         return redirect(route('admin.currencies.index'))->with('status', 'Currency has been created.');
     }
@@ -94,11 +101,14 @@ class CurrenciesController extends BaseAdminController
     {
         $currency = $this->currency->findOrFail($id);
 
-        $currency->name      = $request->name;
-        $currency->code      = $request->code;
-        $currency->precision = $request->precision;
-
-        $currency->save();
+        $currency->fill(
+            $request->only([
+                'name',
+                'code',
+                'precision',
+                'is_enabled',
+            ])
+        )->save();
 
         return redirect()->route('admin.currencies.index')->with('status', 'Currency has been updated.');
     }
@@ -114,6 +124,35 @@ class CurrenciesController extends BaseAdminController
         $currency = $this->currency->findOrFail($id);
 
         $currency->delete();
+
+        return redirect(route('admin.currencies.index'))->with('status', 'Currency has been deleted.');
+    }
+
+    /**
+     * Display a listing of the disabled currencies.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function disabled(Request $request)
+    {
+        $currencies = $this->currency->disabled()->get();
+        $path       = $request->path();
+
+        return view('admin.currencies.index', compact('currencies', 'path'));
+    }
+
+    /**
+     * Enable/disable the resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleEnabled($id)
+    {
+        $currency = $this->currency->findOrFail($id);
+
+        $currency->toggleEnabled()->save();
 
         return redirect(route('admin.currencies.index'))->with('status', 'Currency has been deleted.');
     }

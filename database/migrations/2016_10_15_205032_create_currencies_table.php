@@ -17,6 +17,7 @@ class CreateCurrenciesTable extends Migration
             $table->string('name');
             $table->char('code', 3)->unique();
             $table->integer('precision')->unsigned()->default(2);
+            $table->boolean('is_enabled')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

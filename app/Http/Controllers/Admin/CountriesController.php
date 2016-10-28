@@ -36,20 +36,6 @@ class CountriesController extends BaseAdminController
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function disabled(Request $request)
-    {
-        $countries = $this->country->with('defaultCurrency')->disabled()->get();
-        $path      = $request->path();
-
-        return view('admin.countries.index', compact('countries', 'path'));
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -154,6 +140,20 @@ class CountriesController extends BaseAdminController
         $country->delete();
 
         return redirect(route('admin.countries.index'))->with('status', 'Country has been deleted.');
+    }
+
+    /**
+     * Display a listing of the disabled countries.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function disabled(Request $request)
+    {
+        $countries = $this->country->with('defaultCurrency')->disabled()->get();
+        $path      = $request->path();
+
+        return view('admin.countries.index', compact('countries', 'path'));
     }
 
     /**

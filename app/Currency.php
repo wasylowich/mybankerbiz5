@@ -20,6 +20,7 @@ class Currency extends BaseModel
         'name',
         'code',
         'precision',
+        'is_enabled',
     ];
 
     /**
@@ -34,7 +35,9 @@ class Currency extends BaseModel
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'is_enabled' => 'boolean',
+    ];
 
     /**
      * The attributes that should be cast to Carbon objects.
@@ -51,6 +54,18 @@ class Currency extends BaseModel
     | Define all custom methods for the model here
     |
     */
+
+    /**
+     * Toggle the value of the is_enabled attribute
+     *
+     * @return \Mybankerbiz\Currency
+     */
+    public function toggleEnabled()
+    {
+        $this->setIsEnabled(!$this->is_enabled);
+
+        return $this;
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -70,6 +85,28 @@ class Currency extends BaseModel
     |
     */
 
+    /**
+    * Filters on enabled countries.
+    *
+    * @param  Illuminate\Database\Eloquent\Builder $builder
+    * @return Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeEnabled($builder)
+    {
+        return $builder->whereIsEnabled(true);
+    }
+
+    /**
+    * Filters on disabled countries.
+    *
+    * @param  Illuminate\Database\Eloquent\Builder $builder
+    * @return Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeDisabled($builder)
+    {
+        return $builder->whereIsEnabled(false);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Accessors
@@ -78,6 +115,20 @@ class Currency extends BaseModel
     | Define all model attribute accessors here
     |
     */
+
+    /**
+     * Get the status of the currency
+     *
+     * @return string
+     */
+    public function getStatusAttribute()
+    {
+        if (!is_null($this->deleted_at)) {
+            return 'deleted';
+        }
+
+        return $this->is_enabled ? 'enabled' : 'disabled';
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -108,6 +159,28 @@ class Currency extends BaseModel
     public function setCodeAttribute($code)
     {
         $this->attributes['code'] = strtoupper(trim($code));
+    }
+
+    /**
+     * Mutate the is_enabled attribute
+     *
+     * @param  bool $isEnabled
+     * @return void
+     */
+    public function setIsEnabledAttribute($isEnabled)
+    {
+        $this->attributes['is_enabled'] = (bool) $isEnabled;
+    }
+
+    /**
+     * Mutate the status attribute
+     *
+     * @param  bool $status
+     * @return void
+     */
+    public function setStatusAttribute($status)
+    {
+        $this->attributes['is_enabled'] = (bool) $status;
     }
 
     /*
@@ -147,6 +220,16 @@ class Currency extends BaseModel
     public function getPrecision()
     {
         return $this->precision;
+    }
+
+    /**
+     * Get the is_enabled flag
+     *
+     * @return boolean
+     */
+    public function getIsEnabled()
+    {
+        return (bool) $this->is_enabled;
     }
 
     /*
@@ -189,5 +272,27 @@ class Currency extends BaseModel
     public function setPrecision($precision)
     {
         $this->precision = (int) $precision;
+    }
+
+    /**
+     * Set the is_enabled flag
+     *
+     * @param  bool|int $isEnabled
+     * @return void
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->is_enabled = (bool) $isEnabled;
+    }
+
+    /**
+     * Set the status
+     *
+     * @param  bool|int $status
+     * @return void
+     */
+    public function setStatus($status)
+    {
+        $this->status = (bool) $status;
     }
 }
