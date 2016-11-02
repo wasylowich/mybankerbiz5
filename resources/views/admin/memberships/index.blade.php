@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Users')
+@section('contentheader_title', 'Memberships')
 
 @section('main-content')
 
 <!-- Default box -->
 <div class="box">
     <div class="box-header with-border">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i class='fa fa-plus'></i> Add User</a>
+        <a href="{{ route('admin.memberships.create') }}" class="btn btn-primary"><i class='fa fa-plus'></i>  Add Membership</a>
     </div>
 
     <div class="box-body">
@@ -15,32 +15,24 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Membership</th>
-                    <th>Avatar</th>
-                    <th>Roles</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
-                <tr data-entry-id="{{ $user->id }}">
+                @foreach($memberships as $membership)
+                <tr data-entry-id="{{ $membership->id }}">
                         <td>
-                        @if ($user->deleted_at)
-                            {{ $user->name }}
+                        @if ($membership->deleted_at)
+                            {{ $membership->name }}
                         @else
-                            <a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
+                            <a href="{{ route('admin.memberships.edit', $membership->id) }}">{{ $membership->name }}</a>
                         @endif
                         </td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->profile->membership->name }}</td>
-                        <td>{{ $user->profile->avatar }}</td>
-                        <td>{{ implode(', ', $user->roles->pluck('name')->all()) }}</td>
                         <td>
-                        @unless ($user->deleted_at)
-                            {!! Form::open(['method' => 'delete', 'route' => ['admin.users.destroy', $user->id], 'class' => 'form-inline']) !!}
+                        @unless ($membership->deleted_at)
+                            {!! Form::open(['method' => 'delete', 'route' => ['admin.memberships.destroy', $membership->id], 'class' => 'form-inline']) !!}
                                 <!-- The edit button -->
-                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-xs btn-default">
+                                <a href="{{ route('admin.memberships.edit', $membership->id) }}" class="btn btn-xs btn-default">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                                 <!-- The delete button (submits the form) -->
@@ -55,10 +47,6 @@
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Membership</th>
-                    <th>Avatar</th>
-                    <th>Roles</th>
                     <th>Actions</th>
                 </tr>
             </tfoot>

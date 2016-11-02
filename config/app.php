@@ -170,6 +170,7 @@ return [
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +235,7 @@ return [
         'Form'         => Collective\Html\FormFacade::class,
         'AdminLTE'     => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'Image'        => Intervention\Image\Facades\Image::class,
 
     ],
 

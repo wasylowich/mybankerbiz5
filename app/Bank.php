@@ -162,7 +162,7 @@ class Bank extends BaseModel
     */
 
     /**
-     * Get the status of the client
+     * Get the status of the bank
      *
      * @return string
      */

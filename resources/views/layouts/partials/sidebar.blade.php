@@ -8,7 +8,7 @@
         @if (! Auth::guest())
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="{{ asset(Auth::user()->avatar()) }}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
@@ -75,10 +75,12 @@
                     <li class="{!! Request::is('admin/users*') ? 'active' : '' !!}"><a href="{{ url('admin/users') }}"><i class="fa fa-user"></i> Users</a></li>
                     <li class="{!! Request::is('admin/roles*') ? 'active' : '' !!}"><a href="{{ url('admin/roles') }}"><i class="fa fa-group"></i> Roles</a></li>
                     <li class="{!! Request::is('admin/permissions*') ? 'active' : '' !!}"><a href="{{ url('admin/permissions') }}"><i class="fa fa-key"></i> Permissions</a></li>
+                    <li class="{!! Request::is('admin/memberships*') ? 'active' : '' !!}"><a href="{{ url('admin/memberships') }}"><i class="fa fa-group"></i> Memberships</a></li>
                 </ul>
             </li>
 
             <li class="header">User</li>
+            <li><a href="{{ url('admin/users/profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
         </ul><!-- /.sidebar-menu -->
     </section>

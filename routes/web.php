@@ -32,9 +32,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('currencies', 'CurrenciesController');
 
     // User (& related resources) management routes
+    Route::get('users/profile', ['as' => 'users.profile', 'uses' => 'UsersController@editProfile']);
+    Route::put('users/profile', ['as' => 'users.profile', 'uses' => 'UsersController@updateProfile']);
+    Route::put('users/password', ['as' => 'users.password', 'uses' => 'UsersController@changePassword']);
+    Route::post('users/avatar', ['as' => 'users.avatar', 'uses' => 'UsersController@setAvatar']);
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
+    Route::resource('memberships', 'MembershipsController');
 
     // Bank (& related resources) management routes
     Route::resource('bankTypes', 'BankTypesController');

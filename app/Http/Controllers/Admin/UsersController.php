@@ -4,10 +4,16 @@ namespace Mybankerbiz\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Image;
+use Storage;
 use Mybankerbiz\User;
+use Mybankerbiz\UserProfile;
 use Spatie\Permission\Models\Role;
 use Mybankerbiz\Http\Requests;
 use Mybankerbiz\Http\Requests\Admin\UserRequest;
+use Mybankerbiz\Http\Requests\Admin\UserProfileRequest;
+use Mybankerbiz\Http\Requests\Admin\ChangePasswordRequest;
 // use Mybankerbiz\Http\Controllers\Controller;
 
 class UsersController extends BaseAdminController
@@ -16,7 +22,7 @@ class UsersController extends BaseAdminController
 
     public function __construct(User $user)
     {
-        $this->user = $user;
+        $this->user        = $user;
 
         parent::__construct();
     }
@@ -27,7 +33,7 @@ class UsersController extends BaseAdminController
      */
     public function index()
     {
-        $users = $this->user->with('roles')->get();
+        $users = $this->user->with('roles', 'profile.membership')->get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -117,5 +123,72 @@ class UsersController extends BaseAdminController
         $user->delete();
 
         return redirect(route('admin.users.index'))->with('status', 'User has been deleted.');
+    }
+
+    /**
+     * Show the form for editing the authenticated user profile.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editProfile()
+    {
+        $user = Auth::user();
+        $user->profile;
+
+        return view('admin.users.profile', compact('user'));
+    }
+
+    /**
+     * Update the authenticated user profile in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(UserProfileRequest $request)
+    {
+        $user = Auth::user();
+
+        $user->fill($request->only('name', 'email'))->save();
+
+        return back()->with('status', 'User profile has been updated.');
+    }
+
+    /**
+     * Update the authenticated user profile in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+
+        $user->fill($request->only('password'))->save();
+
+        return back()->with('status', 'User password has been changed.');
+    }
+
+    /**
+     * Update the authenticated user avatar in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function setAvatar(UserProfile $userProfile)
+    {
+        $profile = $userProfile->whereUserId(auth()->id())->first();
+
+        $file = request()->file('avatar');
+        $ext  = $file->extension();
+
+        $avatar = Image::make($file)->fit(215)->stream();
+
+        $path = 'avatars/' . auth()->id() . ".{$ext}";
+        Storage::disk('public')->put($path, $avatar);
+
+        $profile->avatar = Storage::disk('public')->url($path);
+        $profile->save();
+
+        return back();
     }
 }

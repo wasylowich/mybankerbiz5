@@ -2,51 +2,31 @@
 
 namespace Mybankerbiz;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Notifications\Notifiable;
-// use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-
-class User extends BaseModel implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
-{
-    use Authenticatable, Authorizable, CanResetPassword, Notifiable, HasRoles;
+class Membership extends BaseModel {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'memberships';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name'];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = [];
 
     /**
-     * The attributes that should be cast to native types when accessed.
+     * The attributes that should be casted to native types when accessed.
      *
      * @var array
      */
@@ -68,16 +48,6 @@ class User extends BaseModel implements
     |
     */
 
-    /**
-     * Get the path to display the user avatar
-     *
-     * @return string
-     */
-    public function avatar()
-    {
-        return $this->profile->avatar ?? '/img/default-avatar.png';
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Section for: Relation Methods
@@ -86,16 +56,6 @@ class User extends BaseModel implements
     | Define all relation methods for the model here
     |
     */
-
-    /**
-     * One-to-one relation with the UserProfile model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function profile()
-    {
-        return $this->hasOne(UserProfile::class);
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -135,25 +95,42 @@ class User extends BaseModel implements
         $this->attributes['name'] = trim($name);
     }
 
-    /**
-     * Mutate the email attribute
-     *
-     * @param  string $email
-     * @return void
-     */
-    public function setEmailAttribute($email)
-    {
-        $this->attributes['email'] = strtolower(trim($email));
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Section for: Getters
+    |--------------------------------------------------------------------------
+    |
+    | Define all public methods for getting model attribute values here
+    |
+    */
 
     /**
-     * Mutate the password attribute
+     * Get the name
      *
-     * @param  string $value
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Section for: Setters
+    |--------------------------------------------------------------------------
+    |
+    | Define all public methods for setting model attribute values here
+    |
+    */
+
+    /**
+     * Set the name
+     *
+     * @param  string $name
      * @return void
      */
-    public function setPasswordAttribute($value)
+    public function setName($name)
     {
-        $this->attributes['password'] = bcrypt($value);
+        $this->name = $name;
     }
 }
