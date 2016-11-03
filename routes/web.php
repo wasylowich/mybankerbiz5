@@ -42,6 +42,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('memberships', 'MembershipsController');
 
     // Bank (& related resources) management routes
+    Route::put('banks/{bank}/updateprofile', ['as' => 'banks.updateprofile', 'uses' => 'BanksController@updateProfile']);
+    Route::post('banks/{bank}/updatelogo', ['as' => 'banks.updatelogo', 'uses' => 'BanksController@updateLogo']);
     Route::resource('bankTypes', 'BankTypesController');
     Route::resource('interestConventions', 'InterestConventionsController');
     Route::resource('interestTerms', 'InterestTermsController');

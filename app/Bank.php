@@ -64,6 +64,16 @@ class Bank extends BaseModel
     |
     */
 
+    /**
+     * Get the path to display the bank logo
+     *
+     * @return string
+     */
+    public function logo()
+    {
+        return $this->profile->logo ?? '/img/default-logo.jpg';
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Relation Methods
@@ -141,6 +151,16 @@ class Bank extends BaseModel
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * One-to-one relation with the BankProfile model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(BankProfile::class);
     }
 
     /*

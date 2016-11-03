@@ -11,6 +11,7 @@ use Mybankerbiz\User;
 use Mybankerbiz\UserProfile;
 use Spatie\Permission\Models\Role;
 use Mybankerbiz\Http\Requests;
+use Mybankerbiz\Http\Requests\Admin\AvatarRequest;
 use Mybankerbiz\Http\Requests\Admin\UserRequest;
 use Mybankerbiz\Http\Requests\Admin\UserProfileRequest;
 use Mybankerbiz\Http\Requests\Admin\ChangePasswordRequest;
@@ -22,7 +23,7 @@ class UsersController extends BaseAdminController
 
     public function __construct(User $user)
     {
-        $this->user        = $user;
+        $this->user = $user;
 
         parent::__construct();
     }
@@ -41,6 +42,7 @@ class UsersController extends BaseAdminController
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Mybankerbiz\User  $user
      * @return \Illuminate\Http\Response
      */
     public function create(User $user)
@@ -53,7 +55,7 @@ class UsersController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mybankerbiz\Http\Requests\Admin\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
@@ -95,7 +97,7 @@ class UsersController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mybankerbiz\Http\Requests\Admin\UserRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -141,7 +143,7 @@ class UsersController extends BaseAdminController
     /**
      * Update the authenticated user profile in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mybankerbiz\Http\Requests\Admin\UserProfileRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function updateProfile(UserProfileRequest $request)
@@ -156,7 +158,7 @@ class UsersController extends BaseAdminController
     /**
      * Update the authenticated user profile in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mybankerbiz\Http\Requests\Admin\ChangePasswordRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function changePassword(ChangePasswordRequest $request)
@@ -171,10 +173,10 @@ class UsersController extends BaseAdminController
     /**
      * Update the authenticated user avatar in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mybankerbiz\Http\Requests\Admin\AvatarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function setAvatar(UserProfile $userProfile)
+    public function setAvatar(AvatarRequest $request, UserProfile $userProfile)
     {
         $profile = $userProfile->whereUserId(auth()->id())->first();
 

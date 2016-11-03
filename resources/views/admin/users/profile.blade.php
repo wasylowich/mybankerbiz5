@@ -20,7 +20,7 @@
 
                     <div class="row">
                         <div class="col-sm-6" style="text-align:center">
-                            <img src="{{ asset($user->profile->avatar ?? '/img/default-avatar.png') }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;" alt="User Image" />
+                            <img src="{{ asset($user->avatar()) }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;" alt="User Image" />
                         </div>
 
                         <div class="col-sm-6">

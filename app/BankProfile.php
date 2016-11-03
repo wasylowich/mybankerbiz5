@@ -2,14 +2,14 @@
 
 namespace Mybankerbiz;
 
-class UserProfile extends BaseModel
+class BankProfile extends BaseModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'user_profiles';
+    protected $table = 'bank_profiles';
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +17,10 @@ class UserProfile extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'avatar',
-        'is_active',
-        'user_id',
-        'membership_id',
+        'logo',
+        'annual_report',
+        'bio',
+        'bank_id',
     ];
 
     /**
@@ -35,9 +35,7 @@ class UserProfile extends BaseModel
      *
      * @var array
      */
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
+    protected $casts = [];
 
     /**
      * The attributes that should be cast to Carbon objects.
@@ -65,23 +63,13 @@ class UserProfile extends BaseModel
     */
 
     /**
-     * Many-to-one relation with the User model.
+     * Many-to-one relation with the Bank model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function bank()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Many-to-one relation with the Membership model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function membership()
-    {
-        return $this->belongsTo(Membership::class);
+        return $this->belongsTo(Bank::class);
     }
 
     /*
@@ -103,7 +91,7 @@ class UserProfile extends BaseModel
     */
 
     /**
-     * Get the status of the user_profile
+     * Get the status of the bank_profile
      *
      * @return string
      */
@@ -126,36 +114,36 @@ class UserProfile extends BaseModel
     */
 
     /**
-     * Mutate the avatar attribute
+     * Mutate the logo attribute
      *
-     * @param  string $avatar
+     * @param  string $logo
      * @return void
      */
-    public function setAvatarAttribute($avatar)
+    public function setAvatarAttribute($logo)
     {
-        $this->attributes['avatar'] = trim($avatar);
+        $this->attributes['logo'] = trim($logo);
     }
 
     /**
-     * Mutate the is_active attribute
+     * Mutate the annual_report attribute
      *
-     * @param  bool $isActive
+     * @param  string $annualReport
      * @return void
      */
-    public function setIsActiveAttribute($isActive)
+    public function setAnnualReportAttribute($annualReport)
     {
-        $this->attributes['is_active'] = (bool) $isActive;
+        $this->attributes['annual_report'] = trim($annualReport);
     }
 
     /**
-     * Mutate the status attribute
+     * Mutate the bio attribute
      *
-     * @param  bool $status
+     * @param  string $bio
      * @return void
      */
-    public function setStatusAttribute($status)
+    public function setBioAttribute($bio)
     {
-        $this->attributes['is_active'] = (bool) $status;
+        $this->attributes['bio'] = trim($bio);
     }
 
     /*
@@ -168,23 +156,33 @@ class UserProfile extends BaseModel
     */
 
     /**
-     * Get the avatar
+     * Get the logo
      *
      * @return string
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return $this->logo;
     }
 
     /**
-     * Get the is_active flag
+     * Get the annual_report
      *
-     * @return boolean
+     * @return string
      */
-    public function getIsActive()
+    public function getAnnualReport()
     {
-        return (bool) $this->is_active;
+        return $this->annual_report;
+    }
+
+    /**
+     * Get the bio
+     *
+     * @return string
+     */
+    public function getBio()
+    {
+        return $this->bio;
     }
 
     /*
@@ -197,61 +195,48 @@ class UserProfile extends BaseModel
     */
 
     /**
-     * Set the user_id
+     * Set the bank_id
      *
-     * @param  int|\App\User $user
+     * @param  int|\App\Bank $bank
      * @return void
      */
-    public function setUser($user)
+    public function setBank($bank)
     {
-        $this->user_id = is_a($user, User::class)
-            ? $user->getId()
-            : $user;
+        $this->bank_id = is_a($bank, Bank::class)
+            ? $bank->getId()
+            : $bank;
     }
 
     /**
-     * Set the membership_id
+     * Set the logo
      *
-     * @param  int|\App\User $membership
+     * @param  string $logo
      * @return void
      */
-    public function setMembership($membership)
+    public function setLogo($logo)
     {
-        $this->membership_id = is_a($membership, User::class)
-            ? $membership->getId()
-            : $membership;
+        $this->logo = $logo;
     }
 
     /**
-     * Set the avatar
+     * Set the annual_report
      *
-     * @param  string $avatar
+     * @param  string $annualReport
      * @return void
      */
-    public function setAvatar($avatar)
+    public function setAnnualReport($annualReport)
     {
-        $this->avatar = $avatar;
+        $this->annual_report = $annualReport;
     }
 
     /**
-     * Set the is_active flag
+     * Set the bio
      *
-     * @param  bool|int $isActive
+     * @param  string $bio
      * @return void
      */
-    public function setIsActive($isActive)
+    public function setBio($bio)
     {
-        $this->is_active = (bool) $isActive;
-    }
-
-    /**
-     * Set the status
-     *
-     * @param  bool|int $status
-     * @return void
-     */
-    public function setStatus($status)
-    {
-        $this->status = (bool) $status;
+        $this->bio = $bio;
     }
 }
