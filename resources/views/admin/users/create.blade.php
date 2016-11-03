@@ -1,57 +1,16 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'User Profile')
+@section('contentheader_title', 'Add New User')
 
 @section('main-content')
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8 col-md-offset-2">
+
+        <a href="{{ route('admin.users.index') }}"><i class="fa fa-angle-double-left"></i> Back to all users</a><br /><br />
 
         {!! Form::model($user, [
             'method' => 'post',
-            'route' => ['admin.users.updateavatar', $user->id],
-            'files' => true
-        ]) !!}
-
-        <!-- Default box -->
-        <div class="box">
-            <div class="box-body row">
-                <fieldset class="col-sm-12">
-                    <legend>User Avatar</legend>
-
-                    <div class="row">
-                        <div class="col-sm-6" style="text-align:center">
-                            <img src="{{ asset($user->avatar()) }}" style="width:150px; height:150px; border-radius:50%; margin-right:25px;" alt="User Avatar" />
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                {!! Form::label('avatar', 'Avatar') !!}
-                                {!! Form::file('avatar', null, ['class' => 'form-control', 'autofocus' => 'autofocus']) !!}
-
-                                @if ($errors->has('avatar'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('avatar') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="col-xs-12">
-                                {!! Form::submit('Save Avatar', ['class' => 'btn btn-primary']) !!}
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </div>
-        </div>
-
-        {!! Form::close() !!}
-    </div>
-    <div class="col-md-4">
-
-        {!! Form::model($user, [
-            'method' => 'put',
-            'route' => ['admin.users.updateprofile', $user->id]
+            'route' => ['admin.users.store']
         ]) !!}
 
         <!-- Default box -->
@@ -82,28 +41,6 @@
                         @endif
                     </div>
 
-                    <div class="col-xs-12">
-                        {!! Form::submit('Save User Profile', ['class' => 'btn btn-primary']) !!}
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-
-        {!! Form::close() !!}
-    </div>
-    <div class="col-md-4">
-
-        {!! Form::model($user, [
-            'method' => 'put',
-            'route' => ['admin.users.changepassword', $user->id]
-        ]) !!}
-
-        <!-- Default box -->
-        <div class="box">
-            <div class="box-body row">
-                <fieldset class="col-sm-12">
-                    <legend>Change Password</legend>
-
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         {!! Form::label('password', 'Password') !!}
                         {!! Form::password('password', ['class' => 'form-control']) !!}
@@ -126,8 +63,25 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        {!! Form::label('roles', 'User Role Permissions') !!}
+
+                        <div class="row">
+                        @foreach ($roles as $role)
+                            <div class="col-sm-4">
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('roles[]', $role->name, false) !!}
+                                        {{ $role->name }}
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+
                     <div class="col-xs-12">
-                        {!! Form::submit('Change Password', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Create New User', ['class' => 'btn btn-primary']) !!}
                     </div>
                 </fieldset>
             </div>

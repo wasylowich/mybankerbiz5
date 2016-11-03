@@ -68,7 +68,7 @@ class UserRequest extends FormRequest
                 return [
                     'name'      => 'required',
                     'email'     => 'required|email|unique:users,email,' . $this->route('user') . ',id',
-                    'password'  => 'required_with:password_confirmation|confirmed',
+                    // 'password'  => 'required_with:password_confirmation|confirmed',
                     // 'role_list' => 'required|array',
                 ];
 

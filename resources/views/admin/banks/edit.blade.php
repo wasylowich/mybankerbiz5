@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('contentheader_title', $bank->exists ? 'Editing ' . $bank->name : 'Add New Bank')
+@section('contentheader_title', 'Editing ' . $bank->name)
 
 @section('main-content')
 <div class="row">

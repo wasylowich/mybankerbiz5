@@ -49,7 +49,7 @@ class UsersController extends BaseAdminController
     {
         $roles = Role::all();
 
-        return view('admin.users.form', compact('user', 'roles'));
+        return view('admin.users.create', compact('user', 'roles'));
     }
 
     /**
@@ -91,7 +91,7 @@ class UsersController extends BaseAdminController
         $user = $this->user->findOrFail($id);
         $roles = Role::all();
 
-        return view('admin.users.form', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -105,7 +105,7 @@ class UsersController extends BaseAdminController
     {
         $user = $this->user->findOrFail($id);
 
-        $user->fill($request->only('name', 'email', 'password'))->save();
+        $user->fill($request->only('name', 'email'))->save();
 
         $user->syncRoles($request->roles ?: []);
 
@@ -144,11 +144,12 @@ class UsersController extends BaseAdminController
      * Update the authenticated user profile in storage.
      *
      * @param  \Mybankerbiz\Http\Requests\Admin\UserProfileRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateProfile(UserProfileRequest $request)
+    public function updateProfile(UserProfileRequest $request, $id)
     {
-        $user = Auth::user();
+        $user = $this->user->findOrFail($id);
 
         $user->fill($request->only('name', 'email'))->save();
 
@@ -159,9 +160,10 @@ class UsersController extends BaseAdminController
      * Update the authenticated user profile in storage.
      *
      * @param  \Mybankerbiz\Http\Requests\Admin\ChangePasswordRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function changePassword(ChangePasswordRequest $request)
+    public function changePassword(ChangePasswordRequest $request, $id)
     {
         $user = Auth::user();
 
@@ -174,11 +176,12 @@ class UsersController extends BaseAdminController
      * Update the authenticated user avatar in storage.
      *
      * @param  \Mybankerbiz\Http\Requests\Admin\AvatarRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function setAvatar(AvatarRequest $request, UserProfile $userProfile)
+    public function updateAvatar(AvatarRequest $request, UserProfile $userProfile, $id)
     {
-        $profile = $userProfile->whereUserId(auth()->id())->first();
+        $profile = $userProfile->whereUserId($id)->first();
 
         $file = request()->file('avatar');
         $ext  = $file->extension();

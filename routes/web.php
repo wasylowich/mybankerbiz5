@@ -33,9 +33,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
 
     // User (& related resources) management routes
     Route::get('users/profile', ['as' => 'users.profile', 'uses' => 'UsersController@editProfile']);
-    Route::put('users/profile', ['as' => 'users.profile', 'uses' => 'UsersController@updateProfile']);
-    Route::put('users/password', ['as' => 'users.password', 'uses' => 'UsersController@changePassword']);
-    Route::post('users/avatar', ['as' => 'users.avatar', 'uses' => 'UsersController@setAvatar']);
+    Route::put('users/{user}/updateprofile', ['as' => 'users.updateprofile', 'uses' => 'UsersController@updateProfile']);
+    Route::put('users/{user}/changepassword', ['as' => 'users.changepassword', 'uses' => 'UsersController@changePassword']);
+    Route::post('users/{user}/updateavatar', ['as' => 'users.updateavatar', 'uses' => 'UsersController@updateAvatar']);
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
