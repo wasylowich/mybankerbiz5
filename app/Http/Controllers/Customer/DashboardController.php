@@ -1,6 +1,6 @@
 <?php
 
-namespace Mybankerbiz\Http\Controllers\Depositor;
+namespace Mybankerbiz\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +9,7 @@ use Mybankerbiz\DepositorProfile;
 use Mybankerbiz\Http\Requests;
 // use Mybankerbiz\Http\Controllers\Controller;
 
-class DashboardController extends BaseDepositorController
+class DashboardController extends BaseCustomerController
 {
     public function __construct()
     {
@@ -25,6 +25,6 @@ class DashboardController extends BaseDepositorController
     {
         $depositorProfiles = DepositorProfile::whereUserId(Auth::user()->id)->get();
 
-        return view('depositor.dashboard.index', compact('depositorProfiles'));
+        return view('customer.dashboard.index', compact('depositorProfiles'));
     }
 }

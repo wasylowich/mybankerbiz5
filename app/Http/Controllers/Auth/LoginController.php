@@ -53,7 +53,7 @@ class LoginController extends Controller
         }
 
         if (Auth::user()->hasAnyRole('depositor')) {
-            return redirect()->route('depositor.dashboard');
+            return redirect()->route('customer.dashboard');
         }
     }
 }

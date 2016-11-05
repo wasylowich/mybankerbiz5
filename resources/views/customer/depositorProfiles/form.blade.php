@@ -1,4 +1,4 @@
-@extends('layouts.depositor')
+@extends('layouts.customer')
 
 @section('contentheader_title', $depositorProfile->exists ? 'Editing ' . $depositorProfile->name : 'Add New DepositorProfile')
 
@@ -6,13 +6,13 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-        <a href="{{ route('depositor.depositorProfiles.index') }}"><i class="fa fa-angle-double-left"></i> Back to all depositorProfiles</a><br /><br />
+        <a href="{{ route('customer.depositorProfiles.index') }}"><i class="fa fa-angle-double-left"></i> Back to all depositorProfiles</a><br /><br />
 
         {!! Form::model($depositorProfile, [
             'method' => $depositorProfile->exists ? 'put' : 'post',
             'route' => $depositorProfile->exists
-                ? ['depositor.depositorProfiles.update', $depositorProfile->id]
-                : ['depositor.depositorProfiles.store']
+                ? ['customer.depositorProfiles.update', $depositorProfile->id]
+                : ['customer.depositorProfiles.store']
         ]) !!}
 
         <!-- Default box -->

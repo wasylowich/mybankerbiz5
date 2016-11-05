@@ -1,6 +1,6 @@
 <?php
 
-namespace Mybankerbiz\Http\Requests\Depositor;
+namespace Mybankerbiz\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 

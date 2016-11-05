@@ -1,6 +1,6 @@
 <?php
 
-namespace Mybankerbiz\Http\Controllers\Depositor;
+namespace Mybankerbiz\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 
@@ -9,10 +9,10 @@ use Mybankerbiz\User;
 use Mybankerbiz\DepositorType;
 use Mybankerbiz\DepositorProfile;
 use Mybankerbiz\Http\Requests;
-use Mybankerbiz\Http\Requests\Depositor\DepositorProfileRequest;
+use Mybankerbiz\Http\Requests\Customer\DepositorProfileRequest;
 // use Mybankerbiz\Http\Controllers\Controller;
 
-class DepositorProfilesController extends BaseDepositorController
+class DepositorProfilesController extends BaseCustomerController
 {
     protected $depositorProfile;
 
@@ -31,7 +31,7 @@ class DepositorProfilesController extends BaseDepositorController
     {
         $depositorProfiles = DepositorProfile::with('depositorType')->whereUserId(Auth::user()->id)->get();
 
-        return view('depositor.depositorProfiles.index', compact('depositorProfiles'));
+        return view('customer.depositorProfiles.index', compact('depositorProfiles'));
     }
 
     /**
@@ -44,7 +44,7 @@ class DepositorProfilesController extends BaseDepositorController
     {
         $depositorTypes = DepositorType::all();
 
-        return view('depositor.depositorProfiles.form', compact('depositorProfile', 'depositorTypes'));
+        return view('customer.depositorProfiles.form', compact('depositorProfile', 'depositorTypes'));
     }
 
     /**
@@ -66,7 +66,7 @@ class DepositorProfilesController extends BaseDepositorController
             ])
         );
 
-        return redirect(route('depositor.depositorProfiles.index'))->with('status', 'DepositorProfile has been created.');
+        return redirect(route('customer.depositorProfiles.index'))->with('status', 'DepositorProfile has been created.');
     }
 
     // /**
@@ -79,7 +79,7 @@ class DepositorProfilesController extends BaseDepositorController
     // {
     //     $depositorProfile = $this->depositorProfile->findOrFail($id);
 
-    //     return view('depositor.depositorProfiles.form', compact('depositorProfile'));
+    //     return view('customer.depositorProfiles.form', compact('depositorProfile'));
     // }
 
     /**
@@ -93,7 +93,7 @@ class DepositorProfilesController extends BaseDepositorController
         $depositorProfile = $this->depositorProfile->with('depositorType')->findOrFail($id);
         $depositorTypes   = DepositorType::all();
 
-        return view('depositor.depositorProfiles.form', compact('depositorProfile', 'depositorTypes'));
+        return view('customer.depositorProfiles.form', compact('depositorProfile', 'depositorTypes'));
     }
 
     /**
@@ -118,7 +118,7 @@ class DepositorProfilesController extends BaseDepositorController
             ])
         )->save();
 
-        return redirect()->route('depositor.depositorProfiles.index')->with('status', 'DepositorProfile has been updated.');
+        return redirect()->route('customer.depositorProfiles.index')->with('status', 'DepositorProfile has been updated.');
     }
 
     /**
@@ -133,6 +133,6 @@ class DepositorProfilesController extends BaseDepositorController
 
         $depositorProfile->delete();
 
-        return redirect(route('depositor.depositorProfiles.index'))->with('status', 'DepositorProfile has been deleted.');
+        return redirect(route('customer.depositorProfiles.index'))->with('status', 'DepositorProfile has been deleted.');
     }
 }

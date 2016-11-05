@@ -300,12 +300,12 @@ class DepositorProfile extends BaseModel
     /**
      * Set the depositor_type_id
      *
-     * @param  int|\App\Depositor $depositorType
+     * @param  int|\App\Customer $depositorType
      * @return void
      */
     public function setDepositorType($depositorType)
     {
-        $this->depositor_type_id = is_a($depositorType, Depositor::class)
+        $this->depositor_type_id = is_a($depositorType, DepositorType::class)
             ? $depositorType->getId()
             : $depositorType;
     }

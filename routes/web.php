@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
 });
 
 // Depositor Interface Routes
-Route::group(['prefix' => 'depositor', 'as' => 'depositor.', 'namespace' => 'Depositor'], function () {
+Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Customer'], function () {
     // Dashboard route
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     Route::resource('depositorProfiles', 'DepositorProfilesController');

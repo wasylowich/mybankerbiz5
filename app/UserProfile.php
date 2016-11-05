@@ -20,7 +20,6 @@ class UserProfile extends BaseModel
         'avatar',
         'is_active',
         'user_id',
-        'membership_id',
     ];
 
     /**
@@ -72,16 +71,6 @@ class UserProfile extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Many-to-one relation with the Membership model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function membership()
-    {
-        return $this->belongsTo(Membership::class);
     }
 
     /*
@@ -207,19 +196,6 @@ class UserProfile extends BaseModel
         $this->user_id = is_a($user, User::class)
             ? $user->getId()
             : $user;
-    }
-
-    /**
-     * Set the membership_id
-     *
-     * @param  int|\App\User $membership
-     * @return void
-     */
-    public function setMembership($membership)
-    {
-        $this->membership_id = is_a($membership, User::class)
-            ? $membership->getId()
-            : $membership;
     }
 
     /**

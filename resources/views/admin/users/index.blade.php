@@ -16,7 +16,6 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Membership</th>
                     <th>Avatar</th>
                     <th>Roles</th>
                     <th>Actions</th>
@@ -33,7 +32,6 @@
                         @endif
                         </td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->profile->membership->name }}</td>
                         <td>{{ $user->profile->avatar }}</td>
                         <td>{{ implode(', ', $user->roles->pluck('name')->all()) }}</td>
                         <td>
@@ -56,7 +54,6 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Membership</th>
                     <th>Avatar</th>
                     <th>Roles</th>
                     <th>Actions</th>

@@ -1,4 +1,4 @@
-@extends('layouts.depositor')
+@extends('layouts.customer')
 
 @section('contentheader_title', 'DepositorProfiles')
 
@@ -7,7 +7,7 @@
 <!-- Default box -->
 <div class="box">
     <div class="box-header with-border">
-        <a href="{{ route('depositor.depositorProfiles.create') }}" class="btn btn-primary"><i class='fa fa-plus'></i>  Add DepositorProfile</a>
+        <a href="{{ route('customer.depositorProfiles.create') }}" class="btn btn-primary"><i class='fa fa-plus'></i>  Add DepositorProfile</a>
     </div>
 
     <div class="box-body">
@@ -29,7 +29,7 @@
                     @if ($depositorProfile->deleted_at)
                         {{ $depositorProfile->name }}
                     @else
-                        <a href="{{ route('depositor.depositorProfiles.edit', $depositorProfile->id) }}">{{ $depositorProfile->name }}</a>
+                        <a href="{{ route('customer.depositorProfiles.edit', $depositorProfile->id) }}">{{ $depositorProfile->name }}</a>
                     @endif
                     </td>
                     <td>{{ $depositorProfile->vatin }}</td>
@@ -38,9 +38,9 @@
                     <td>{{ $depositorProfile->primary }}</td>
                     <td>
                     @unless ($depositorProfile->deleted_at)
-                        {!! Form::open(['method' => 'delete', 'route' => ['depositor.depositorProfiles.destroy', $depositorProfile->id], 'class' => 'form-inline']) !!}
+                        {!! Form::open(['method' => 'delete', 'route' => ['customer.depositorProfiles.destroy', $depositorProfile->id], 'class' => 'form-inline']) !!}
                             <!-- The edit button -->
-                            <a href="{{ route('depositor.depositorProfiles.edit', $depositorProfile->id) }}" class="btn btn-xs btn-default">
+                            <a href="{{ route('customer.depositorProfiles.edit', $depositorProfile->id) }}" class="btn btn-xs btn-default">
                                 <i class="fa fa-edit"></i> Edit
                             </a>
                             <!-- The delete button (submits the form) -->

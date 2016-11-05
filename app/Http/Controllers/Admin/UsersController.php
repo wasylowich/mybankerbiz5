@@ -34,7 +34,7 @@ class UsersController extends BaseAdminController
      */
     public function index()
     {
-        $users = $this->user->with('roles', 'profile.membership')->get();
+        $users = $this->user->with('roles', 'profile')->get();
 
         return view('admin.users.index', compact('users'));
     }
