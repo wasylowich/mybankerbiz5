@@ -97,6 +97,16 @@ class User extends BaseModel implements
         return $this->hasOne(UserProfile::class);
     }
 
+    /**
+     * One-to-many relation with the DepositorProfile model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function depositorProfiles()
+    {
+        return $this->hasMany(DepositorProfile::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Scopes

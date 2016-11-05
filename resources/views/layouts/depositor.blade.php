@@ -58,7 +58,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">User Name</a></li>
-                    <li><a href="/auth/logout">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

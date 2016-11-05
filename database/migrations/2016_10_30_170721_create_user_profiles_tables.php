@@ -12,17 +12,9 @@ class CreateUserProfilesTables extends Migration
      */
     public function up()
     {
-        Schema::create('memberships', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 255)->unique();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('membership_id')->unsigned();
             $table->string('avatar', 255)->nullable();
             $table->boolean('is_active')->default(false);
 
@@ -30,7 +22,6 @@ class CreateUserProfilesTables extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('membership_id')->references('id')->on('memberships');
         });
     }
 
@@ -42,6 +33,5 @@ class CreateUserProfilesTables extends Migration
     public function down()
     {
         Schema::drop('user_profiles');
-        Schema::drop('memberships');
     }
 }

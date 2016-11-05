@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('users', 'UsersController');
     Route::resource('roles', 'RolesController');
     Route::resource('permissions', 'PermissionsController');
-    Route::resource('memberships', 'MembershipsController');
+    Route::resource('depositorTypes', 'DepositorTypesController');
 
     // Bank (& related resources) management routes
     Route::put('banks/{bank}/updateprofile', ['as' => 'banks.updateprofile', 'uses' => 'BanksController@updateProfile']);

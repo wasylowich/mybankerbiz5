@@ -4,7 +4,7 @@ namespace Mybankerbiz\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MembershipRequest extends FormRequest
+class DepositorTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -47,13 +47,13 @@ class MembershipRequest extends FormRequest
 
             case 'POST':
                 return [
-                    'name' => 'required|unique:memberships',
+                    'name' => 'required|unique:depositor_types',
                 ];
 
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name' => 'required|unique:memberships,name,' . $this->route('membership') . ',id',
+                    'name' => 'required|unique:depositor_types,name,' . $this->route('depositorType') . ',id',
                 ];
 
             default:

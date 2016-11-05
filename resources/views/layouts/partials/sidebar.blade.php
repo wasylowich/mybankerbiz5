@@ -75,7 +75,7 @@
                     <li class="{!! Request::is('admin/users*') ? 'active' : '' !!}"><a href="{{ url('admin/users') }}"><i class="fa fa-user"></i> Users</a></li>
                     <li class="{!! Request::is('admin/roles*') ? 'active' : '' !!}"><a href="{{ url('admin/roles') }}"><i class="fa fa-group"></i> Roles</a></li>
                     <li class="{!! Request::is('admin/permissions*') ? 'active' : '' !!}"><a href="{{ url('admin/permissions') }}"><i class="fa fa-key"></i> Permissions</a></li>
-                    <li class="{!! Request::is('admin/memberships*') ? 'active' : '' !!}"><a href="{{ url('admin/memberships') }}"><i class="fa fa-group"></i> Memberships</a></li>
+                    <li class="{!! Request::is('admin/depositorTypes*') ? 'active' : '' !!}"><a href="{{ url('admin/depositorTypes') }}"><i class="fa fa-group"></i> DepositorTypes</a></li>
                 </ul>
             </li>
 

@@ -1,28 +1,28 @@
 @extends('layouts.app')
 
-@section('contentheader_title', $membership->exists ? 'Editing ' . $membership->name : 'Add New Membership')
+@section('contentheader_title', $depositorType->exists ? 'Editing ' . $depositorType->name : 'Add New DepositorType')
 
 @section('main-content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-        <a href="{{ route('admin.memberships.index') }}"><i class="fa fa-angle-double-left"></i> Back to all memberships</a><br /><br />
+        <a href="{{ route('admin.depositorTypes.index') }}"><i class="fa fa-angle-double-left"></i> Back to all depositorTypes</a><br /><br />
 
-        {!! Form::model($membership, [
-            'method' => $membership->exists ? 'put' : 'post',
-            'route' => $membership->exists
-                ? ['admin.memberships.update', $membership->id]
-                : ['admin.memberships.store']
+        {!! Form::model($depositorType, [
+            'method' => $depositorType->exists ? 'put' : 'post',
+            'route' => $depositorType->exists
+                ? ['admin.depositorTypes.update', $depositorType->id]
+                : ['admin.depositorTypes.store']
         ]) !!}
 
         <!-- Default box -->
         <div class="box">
             <div class="box-body row">
                 <fieldset class="col-sm-12">
-                    <legend>Membership Information</legend>
+                    <legend>DepositorType Information</legend>
 
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        {!! Form::label('name', 'Membership Name') !!}
+                        {!! Form::label('name', 'DepositorType Name') !!}
                         {!! Form::text('name', null, ['class' => 'form-control', 'autofocus' => 'autofocus']) !!}
 
                         @if ($errors->has('name'))
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="col-xs-12">
-                        {!! Form::submit($membership->exists ? 'Save Membership' : 'Create New Membership', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit($depositorType->exists ? 'Save DepositorType' : 'Create New DepositorType', ['class' => 'btn btn-primary']) !!}
                     </div>
                 </fieldset>
             </div>

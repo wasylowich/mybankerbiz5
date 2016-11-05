@@ -2,14 +2,14 @@
 
 namespace Mybankerbiz;
 
-class Membership extends BaseModel {
+class DepositorType extends BaseModel {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'memberships';
+    protected $table = 'depositor_types';
 
     /**
      * The attributes that are mass assignable.
