@@ -107,6 +107,16 @@ class DepositorProfile extends BaseModel
     */
 
     /**
+     * Get the primary indicator of the depositor_profile
+     *
+     * @return string
+     */
+    public function getPrimaryAttribute()
+    {
+        return $this->is_primary ? 'primary' : '';
+    }
+
+    /**
      * Get the status of the depositor_profile
      *
      * @return string
@@ -171,6 +181,17 @@ class DepositorProfile extends BaseModel
     public function setIsPrimaryAttribute($isPrimary)
     {
         $this->attributes['is_primary'] = (bool) $isPrimary;
+    }
+
+    /**
+     * Mutate the primary attribute
+     *
+     * @param  bool $primary
+     * @return void
+     */
+    public function setPrimaryAttribute($primary)
+    {
+        $this->attributes['is_primary'] = (bool) $primary;
     }
 
     /**
@@ -331,6 +352,17 @@ class DepositorProfile extends BaseModel
     public function setIsPrimary($isPrimary)
     {
         $this->is_primary = (bool) $isPrimary;
+    }
+
+    /**
+     * Set the primary
+     *
+     * @param  bool|int $primary
+     * @return void
+     */
+    public function setPrimary($primary)
+    {
+        $this->primary = (bool) $primary;
     }
 
     /**
