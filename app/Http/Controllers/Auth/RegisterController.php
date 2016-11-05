@@ -62,10 +62,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            // 'password' => bcrypt($data['password']),
+            'password' => $data['password'],
         ]);
+
+        // Only customers (a.k.a. depositors) can self-register
+        $user->assignRole('depositor');
+
+        // Temporary: We will hard code every new user to have a 'personal' membership (ID: 6)
+        // TODO: Allow customers to declare their own membership as a part of the registration process
+        $profile = $user->profile()->create([
+            'membership_id' => 6,
+        ]);
+
+        return $user;
+
     }
 }
