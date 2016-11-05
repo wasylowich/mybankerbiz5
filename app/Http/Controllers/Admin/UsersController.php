@@ -165,7 +165,7 @@ class UsersController extends BaseAdminController
      */
     public function changePassword(ChangePasswordRequest $request, $id)
     {
-        $user = Auth::user();
+        $user = $this->user->findOrFail($id);
 
         $user->fill($request->only('password'))->save();
 

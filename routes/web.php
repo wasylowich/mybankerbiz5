@@ -49,3 +49,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('interestTerms', 'InterestTermsController');
     Route::resource('banks', 'BanksController');
 });
+
+// Depositor Interface Routes
+Route::group(['namespace' => 'Depositor'], function () {
+    // Dashboard route
+    Route::get('dashboard', ['as' => 'depositor.dashboard', 'uses' => 'DashboardController@index']);
+});
