@@ -1,10 +1,10 @@
 <?php
 
-namespace Mybankerbiz\Http\Requests\Admin;
+namespace Mybankerbiz\Http\Requests\Depositor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MembershipRequest extends FormRequest
+class DepositorProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -47,13 +47,21 @@ class MembershipRequest extends FormRequest
 
             case 'POST':
                 return [
-                    'name' => 'required|unique:memberships',
+                    'name'              => 'required|min:3',
+                    'vatin'             => 'digits:8',
+                    'pin'               => 'required',
+                    // 'user_id'           => 'required|exists:users,id,deleted_at,NULL',
+                    'depositor_type_id' => 'required|exists:depositor_types,id,deleted_at,NULL',
                 ];
 
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name' => 'required|unique:memberships,name,' . $this->route('membership') . ',id',
+                    'name'              => 'required|min:3',
+                    'vatin'             => 'digits:8',
+                    'pin'               => 'required',
+                    // 'user_id'           => 'required|exists:users,id,deleted_at,NULL',
+                    'depositor_type_id' => 'required|exists:depositor_types,id,deleted_at,NULL',
                 ];
 
             default:

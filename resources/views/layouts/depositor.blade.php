@@ -54,11 +54,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/depositor/dashboard">Dashboard</a></li>
+                    <li><a href="{{ route('depositor.depositorProfiles.index') }}">DepositorProfiles</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">User Name</a></li>
-                    <li><a href="/auth/logout">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
