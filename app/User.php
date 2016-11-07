@@ -107,6 +107,16 @@ class User extends BaseModel implements
         return $this->hasMany(DepositorProfile::class);
     }
 
+    /**
+     * One-to-many relations with the Enquiry model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class, 'enquirer_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Scopes

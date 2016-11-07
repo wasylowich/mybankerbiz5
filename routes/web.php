@@ -55,4 +55,5 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Custo
     // Dashboard route
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     Route::resource('depositorProfiles', 'DepositorProfilesController');
+    Route::resource('enquiries', 'EnquiriesController', ['only' => ['index', 'create', 'store']]);
 });

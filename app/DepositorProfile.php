@@ -88,6 +88,16 @@ class DepositorProfile extends BaseModel
         return $this->belongsTo(DepositorType::class);
     }
 
+    /**
+     * One-to-many relations with the Enquiry model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Scopes

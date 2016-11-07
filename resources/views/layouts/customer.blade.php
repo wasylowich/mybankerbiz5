@@ -56,6 +56,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/customer/dashboard">Dashboard</a></li>
                     <li><a href="{{ route('customer.depositorProfiles.index') }}">DepositorProfiles</a></li>
+                    <li><a href="{{ route('customer.enquiries.index') }}">Enquiries</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">User Name</a></li>
