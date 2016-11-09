@@ -91,7 +91,7 @@
 
                     <div class="form-group{{ $errors->has('fixation_period_start_date') ? ' has-error' : '' }}">
                         {!! Form::label('fixation_period_start_date', 'FixationPeriodStartDate') !!}
-                        {!! Form::text('fixation_period_start_date', null, ['class' => 'form-control']) !!}
+                        {!! Form::input('date', 'fixation_period_start_date', Carbon\Carbon::now()->addDays(2)->format('Y-m-d'), ['class' => 'form-control']) !!}
 
                         @if ($errors->has('fixation_period_start_date'))
                             <span class="help-block">
@@ -102,7 +102,7 @@
 
                     <div class="form-group{{ $errors->has('fixation_period_end_date') ? ' has-error' : '' }}">
                         {!! Form::label('fixation_period_end_date', 'FixationPeriodEndDate') !!}
-                        {!! Form::text('fixation_period_end_date', null, ['class' => 'form-control']) !!}
+                        {!! Form::input('date', 'fixation_period_end_date', Carbon\Carbon::now()->addDays(2)->addYear()->format('Y-m-d'), ['class' => 'form-control']) !!}
 
                         @if ($errors->has('fixation_period_end_date'))
                             <span class="help-block">

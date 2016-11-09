@@ -108,13 +108,33 @@ class User extends BaseModel implements
     }
 
     /**
-     * One-to-many relations with the Enquiry model.
+     * One-to-many relation with the Enquiry model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function enquiries()
     {
         return $this->hasMany(Enquiry::class, 'enquirer_id');
+    }
+
+    /**
+     * One-to-many relation with the OfferChance model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offerChances()
+    {
+        return $this->hasMany(OfferChance::class, 'bidder_id');
+    }
+
+    /**
+     * One-to-many relation with the Offer model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offers()
+    {
+        return $this->hasMany(Offer::class, 'bidder_id');
     }
 
     /*

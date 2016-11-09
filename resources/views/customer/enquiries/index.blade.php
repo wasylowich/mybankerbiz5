@@ -34,7 +34,7 @@
                         {{ $enquiry->fixation_period }} days
                     @endif
                     </td>
-                    <td>TODO</td>
+                    <td>{{ $enquiry->offers->count() }}</td>
                 </tr>
                 @endforeach
             </tbody>

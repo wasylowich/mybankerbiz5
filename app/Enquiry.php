@@ -113,6 +113,26 @@ class Enquiry extends BaseModel
         return $this->belongsTo(Currency::class);
     }
 
+    /**
+     * One-to-many relation with the OfferChance model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offerChances()
+    {
+        return $this->hasMany(OfferChance::class);
+    }
+
+    /**
+     * One-to-many relation with the Offer model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Scopes

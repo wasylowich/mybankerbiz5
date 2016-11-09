@@ -27,6 +27,7 @@ class UsersTableSeeder extends Seeder
         $users = array(
             array(
                 'id'         => 1,
+                'bank_id'    => null,
                 'name'       => 'Clark Kent',
                 'email'      => 'sup@man.com',
                 'password'   => bcrypt('secret'),
@@ -36,6 +37,7 @@ class UsersTableSeeder extends Seeder
 
             array(
                 'id'         => 2,
+                'bank_id'    => null,
                 'name'       => 'Administrator',
                 'email'      => 'adm@man.com',
                 'password'   => bcrypt('secret'),
@@ -45,6 +47,7 @@ class UsersTableSeeder extends Seeder
 
             array(
                 'id'         => 3,
+                'bank_id'    => 1,
                 'name'       => 'Bidder',
                 'email'      => 'bid@man.com',
                 'password'   => bcrypt('secret'),
@@ -54,6 +57,7 @@ class UsersTableSeeder extends Seeder
 
             array(
                 'id'         => 4,
+                'bank_id'    => null,
                 'name'       => 'Depositor',
                 'email'      => 'dep@man.com',
                 'password'   => bcrypt('secret'),

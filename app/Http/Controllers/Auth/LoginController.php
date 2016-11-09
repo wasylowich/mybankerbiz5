@@ -52,6 +52,10 @@ class LoginController extends Controller
             return redirect('/home');
         }
 
+        if (Auth::user()->hasAnyRole('bidder')) {
+            return redirect()->route('banker.dashboard');
+        }
+
         if (Auth::user()->hasAnyRole('depositor')) {
             return redirect()->route('customer.dashboard');
         }

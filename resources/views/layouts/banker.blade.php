@@ -54,10 +54,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/customer/dashboard">Dashboard</a></li>
-                    <li><a href="{{ route('customer.depositorProfiles.index') }}">DepositorProfiles</a></li>
-                    <li><a href="{{ route('customer.enquiries.index') }}">Enquiries</a></li>
-                    <li><a href="{{ route('customer.offers.index') }}">Offers</a></li>
+                    <li><a href="/banker/dashboard">Dashboard</a></li>
+                    <li><a href="{{ route('banker.offerChances.index') }}">OfferChances</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">{{ Auth::user()->name }}</a></li>

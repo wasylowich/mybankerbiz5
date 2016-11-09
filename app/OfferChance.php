@@ -2,14 +2,14 @@
 
 namespace Mybankerbiz;
 
-class BankProfile extends BaseModel
+class OfferChance extends BaseModel
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'bank_profiles';
+    protected $table = 'offer_chances';
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +17,10 @@ class BankProfile extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'logo',
-        'annual_report',
-        'bio',
+        'state',
         'bank_id',
+        'bidder_id',
+        'enquiry_id',
     ];
 
     /**
@@ -53,6 +53,30 @@ class BankProfile extends BaseModel
     |
     */
 
+    /**
+     * Updates the state of the OfferChance to 'accepted' in storage
+     *
+     * @return Mybankerbiz\OfferChance
+     */
+    public function accept()
+    {
+        $this->state = 'accepted';
+
+        return $this;
+    }
+
+    /**
+     * Updates the state of the OfferChance to 'rejected' in storage
+     *
+     * @return Mybankerbiz\OfferChance
+     */
+    public function decline()
+    {
+        $this->state = 'declined';
+
+        return $this;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Relation Methods
@@ -70,6 +94,26 @@ class BankProfile extends BaseModel
     public function bank()
     {
         return $this->belongsTo(Bank::class);
+    }
+
+    /**
+     * Many-to-one relation with the User model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bidder()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Many-to-one relation with the Enquiry model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function enquiry()
+    {
+        return $this->belongsTo(Enquiry::class);
     }
 
     /*
@@ -90,20 +134,6 @@ class BankProfile extends BaseModel
     |
     */
 
-    /**
-     * Get the status of the bank_profile
-     *
-     * @return string
-     */
-    public function getStatusAttribute()
-    {
-        if (!is_null($this->deleted_at)) {
-            return 'deleted';
-        }
-
-        return $this->is_active ? 'active' : 'inactive';
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Section for: Mutators
@@ -114,36 +144,14 @@ class BankProfile extends BaseModel
     */
 
     /**
-     * Mutate the logo attribute
+     * Mutate the state attribute
      *
-     * @param  string $logo
+     * @param  string $state
      * @return void
      */
-    public function setLogoAttribute($logo)
+    public function setStateAttribute($state)
     {
-        $this->attributes['logo'] = trim($logo);
-    }
-
-    /**
-     * Mutate the annual_report attribute
-     *
-     * @param  string $annualReport
-     * @return void
-     */
-    public function setAnnualReportAttribute($annualReport)
-    {
-        $this->attributes['annual_report'] = trim($annualReport);
-    }
-
-    /**
-     * Mutate the bio attribute
-     *
-     * @param  string $bio
-     * @return void
-     */
-    public function setBioAttribute($bio)
-    {
-        $this->attributes['bio'] = trim($bio);
+        $this->attributes['state'] = trim($state);
     }
 
     /*
@@ -156,33 +164,13 @@ class BankProfile extends BaseModel
     */
 
     /**
-     * Get the logo
+     * Get the state
      *
      * @return string
      */
-    public function getLogo()
+    public function getState()
     {
-        return $this->logo;
-    }
-
-    /**
-     * Get the annual_report
-     *
-     * @return string
-     */
-    public function getAnnualReport()
-    {
-        return $this->annual_report;
-    }
-
-    /**
-     * Get the bio
-     *
-     * @return string
-     */
-    public function getBio()
-    {
-        return $this->bio;
+        return $this->state;
     }
 
     /*
@@ -208,35 +196,39 @@ class BankProfile extends BaseModel
     }
 
     /**
-     * Set the logo
+     * Set the bidder_id
      *
-     * @param  string $logo
+     * @param  int|\App\User $bank
      * @return void
      */
-    public function setLogo($logo)
+    public function setBidder($bidder)
     {
-        $this->logo = $logo;
+        $this->bidder_id = is_a($bidder, User::class)
+            ? $bidder->getId()
+            : $bidder;
     }
 
     /**
-     * Set the annual_report
+     * Set the enquiry_id
      *
-     * @param  string $annualReport
+     * @param  int|\App\Bank $enquiry
      * @return void
      */
-    public function setAnnualReport($annualReport)
+    public function setEnquiry($enquiry)
     {
-        $this->annual_report = $annualReport;
+        $this->enquiry_id = is_a($enquiry, Bank::class)
+            ? $enquiry->getId()
+            : $enquiry;
     }
 
     /**
-     * Set the bio
+     * Set the state
      *
-     * @param  string $bio
+     * @param  string $state
      * @return void
      */
-    public function setBio($bio)
+    public function setState($state)
     {
-        $this->bio = $bio;
+        $this->state = $state;
     }
 }

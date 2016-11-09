@@ -33,7 +33,7 @@ class EnquiriesController extends BaseCustomerController
      */
     public function index()
     {
-        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency')->whereEnquirerId(Auth::user()->id)->get();
+        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency', 'offers')->whereEnquirerId(Auth::user()->id)->get();
 
         return view('customer.enquiries.index', compact('enquiries'));
     }

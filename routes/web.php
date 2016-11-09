@@ -50,10 +50,33 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::resource('banks', 'BanksController');
 });
 
-// Depositor Interface Routes
+// Banker Interface Routes
+Route::group(['prefix' => 'banker', 'as' => 'banker.', 'namespace' => 'Banker'], function () {
+    // Dashboard route
+    Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+
+    // OfferChances routes
+    Route::post('offerChances/{offerChance}/decline', ['as' => 'offerChances.decline', 'uses' => 'OfferChancesController@decline']);
+    Route::resource('offerChances', 'OfferChancesController', ['only' => ['index']]);
+
+    // Offers routes
+    Route::post('offers/{offer}/cancel', ['as' => 'offers.cancel', 'uses' => 'OffersController@cancel']);
+    Route::resource('offers', 'OffersController', ['only' => ['index', 'create', 'store']]);
+});
+
+// Customer Interface Routes
 Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Customer'], function () {
     // Dashboard route
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+
+    // DepositorProfiles routes
     Route::resource('depositorProfiles', 'DepositorProfilesController');
+
+    // Enquiries routes
     Route::resource('enquiries', 'EnquiriesController', ['only' => ['index', 'create', 'store']]);
+
+    // Offers routes
+    Route::get('offers/{offer}/accept', ['as' => 'offers.accept', 'uses' => 'OffersController@accept']);
+    Route::post('offers/{offer}/reject', ['as' => 'offers.reject', 'uses' => 'OffersController@reject']);
+    Route::resource('offers', 'OffersController', ['only' => ['index']]);
 });
