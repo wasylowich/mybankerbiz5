@@ -64,7 +64,9 @@ class UsersController extends BaseAdminController
 
         $user->syncRoles($request->roles ?: []);
 
-        return redirect(route('admin.users.index'))->with('status', 'User has been created.');
+        flash('User has been created.');
+
+        return redirect(route('admin.users.index'));
     }
 
     // /**
@@ -109,7 +111,9 @@ class UsersController extends BaseAdminController
 
         $user->syncRoles($request->roles ?: []);
 
-        return redirect()->route('admin.users.index')->with('status', 'User has been updated.');
+        flash('User has been updated.');
+
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -124,7 +128,9 @@ class UsersController extends BaseAdminController
 
         $user->delete();
 
-        return redirect(route('admin.users.index'))->with('status', 'User has been deleted.');
+        flash('User has been deleted.');
+
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -153,7 +159,9 @@ class UsersController extends BaseAdminController
 
         $user->fill($request->only('name', 'email'))->save();
 
-        return back()->with('status', 'User profile has been updated.');
+        flash('User profile has been updated.');
+
+        return back();
     }
 
     /**
@@ -169,7 +177,9 @@ class UsersController extends BaseAdminController
 
         $user->fill($request->only('password'))->save();
 
-        return back()->with('status', 'User password has been changed.');
+        flash('User password has been changed.');
+
+        return back();
     }
 
     /**

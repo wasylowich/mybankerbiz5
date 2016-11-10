@@ -69,7 +69,9 @@ class CountriesController extends BaseAdminController
             ])
         );
 
-        return redirect(route('admin.countries.index'))->with('status', 'Country has been created.');
+        flash('Country has been created.');
+
+        return redirect(route('admin.countries.index'));
     }
 
     // /**
@@ -124,7 +126,9 @@ class CountriesController extends BaseAdminController
             ])
         )->save();
 
-        return redirect()->route('admin.countries.index')->with('status', 'Country has been updated.');
+        flash('Country has been updated.');
+
+        return redirect()->route('admin.countries.index');
     }
 
     /**
@@ -139,7 +143,9 @@ class CountriesController extends BaseAdminController
 
         $country->delete();
 
-        return redirect(route('admin.countries.index'))->with('status', 'Country has been deleted.');
+        flash('Country has been deleted.');
+
+        return redirect(route('admin.countries.index'));
     }
 
     /**
@@ -168,6 +174,8 @@ class CountriesController extends BaseAdminController
 
         $country->toggleEnabled()->save();
 
-        return redirect(route('admin.countries.index'))->with('status', 'Country has been deleted.');
+        flash('Country has been deleted.');
+
+        return redirect(route('admin.countries.index'));
     }
 }

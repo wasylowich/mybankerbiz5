@@ -54,7 +54,9 @@ class BankTypesController extends BaseAdminController
     {
         $bankType = $this->bankType->create($request->only('type'));
 
-        return redirect(route('admin.bankTypes.index'))->with('status', 'BankType has been created.');
+        flash('BankType has been created.');
+
+        return redirect(route('admin.bankTypes.index'));
     }
 
     // /**
@@ -96,7 +98,9 @@ class BankTypesController extends BaseAdminController
 
         $bankType->fill($request->only('type'))->save();
 
-        return redirect()->route('admin.bankTypes.index')->with('status', 'BankType has been updated.');
+        flash('BankType has been updated.');
+
+        return redirect()->route('admin.bankTypes.index');
     }
 
     /**
@@ -111,6 +115,8 @@ class BankTypesController extends BaseAdminController
 
         $bankType->delete();
 
-        return redirect(route('admin.bankTypes.index'))->with('status', 'BankType has been deleted.');
+        flash('BankType has been deleted.');
+
+        return redirect(route('admin.bankTypes.index'));
     }
 }

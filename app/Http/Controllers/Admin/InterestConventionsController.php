@@ -54,7 +54,9 @@ class InterestConventionsController extends BaseAdminController
     {
         $interestConvention = $this->interestConvention->create($request->only('convention'));
 
-        return redirect(route('admin.interestConventions.index'))->with('status', 'InterestConvention has been created.');
+        flash('InterestConvention has been created.');
+
+        return redirect(route('admin.interestConventions.index'));
     }
 
     // /**
@@ -96,7 +98,9 @@ class InterestConventionsController extends BaseAdminController
 
         $interestConvention->fill($request->only('convention'))->save();
 
-        return redirect()->route('admin.interestConventions.index')->with('status', 'InterestConvention has been updated.');
+        flash('InterestConvention has been updated.');
+
+        return redirect()->route('admin.interestConventions.index');
     }
 
     /**
@@ -111,6 +115,8 @@ class InterestConventionsController extends BaseAdminController
 
         $interestConvention->delete();
 
-        return redirect(route('admin.interestConventions.index'))->with('status', 'InterestConvention has been deleted.');
+        flash('InterestConvention has been deleted.');
+
+        return redirect(route('admin.interestConventions.index'));
     }
 }

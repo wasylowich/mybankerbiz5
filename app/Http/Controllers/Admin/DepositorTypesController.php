@@ -54,7 +54,9 @@ class DepositorTypesController extends BaseAdminController
     {
         $depositorType = $this->depositorType->create($request->only('name'));
 
-        return redirect(route('admin.depositorTypes.index'))->with('status', 'DepositorType has been created.');
+        flash('DepositorType has been created.');
+
+        return redirect(route('admin.depositorTypes.index'));
     }
 
     // /**
@@ -96,7 +98,9 @@ class DepositorTypesController extends BaseAdminController
 
         $depositorType->fill($request->only('name'))->save();
 
-        return redirect()->route('admin.depositorTypes.index')->with('status', 'DepositorType has been updated.');
+        flash('DepositorType has been updated.');
+
+        return redirect()->route('admin.depositorTypes.index');
     }
 
     /**
@@ -111,6 +115,8 @@ class DepositorTypesController extends BaseAdminController
 
         $depositorType->delete();
 
-        return redirect(route('admin.depositorTypes.index'))->with('status', 'DepositorType has been deleted.');
+        flash('DepositorType has been deleted.');
+
+        return redirect(route('admin.depositorTypes.index'));
     }
 }

@@ -54,7 +54,9 @@ class InterestTermsController extends BaseAdminController
     {
         $interestTerm = $this->interestTerm->create($request->only('term'));
 
-        return redirect(route('admin.interestTerms.index'))->with('status', 'InterestTerm has been created.');
+        flash('InterestTerm has been created.');
+
+        return redirect(route('admin.interestTerms.index'));
     }
 
     // /**
@@ -96,7 +98,9 @@ class InterestTermsController extends BaseAdminController
 
         $interestTerm->fill($request->only('term'))->save();
 
-        return redirect()->route('admin.interestTerms.index')->with('status', 'InterestTerm has been updated.');
+        flash('InterestTerm has been updated.');
+
+        return redirect()->route('admin.interestTerms.index');
     }
 
     /**
@@ -111,6 +115,8 @@ class InterestTermsController extends BaseAdminController
 
         $interestTerm->delete();
 
-        return redirect(route('admin.interestTerms.index'))->with('status', 'InterestTerm has been deleted.');
+        flash('InterestTerm has been deleted.');
+
+        return redirect(route('admin.interestTerms.index'));
     }
 }

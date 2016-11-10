@@ -57,7 +57,9 @@ class RolesController extends BaseAdminController
 
         $role->syncPermissions($request->permissions ?: []);
 
-        return redirect(route('admin.roles.index'))->with('status', 'Role has been created.');
+        flash('Role has been created.');
+
+        return redirect(route('admin.roles.index'));
     }
 
     // /**
@@ -102,7 +104,9 @@ class RolesController extends BaseAdminController
 
         $role->syncPermissions($request->permissions ?: []);
 
-        return redirect()->route('admin.roles.index')->with('status', 'Role has been updated.');
+        flash('Role has been updated.');
+
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -117,6 +121,8 @@ class RolesController extends BaseAdminController
 
         $role->delete();
 
-        return redirect(route('admin.roles.index'))->with('status', 'Role has been deleted.');
+        flash('Role has been deleted.');
+
+        return redirect(route('admin.roles.index'));
     }
 }

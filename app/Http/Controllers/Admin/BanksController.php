@@ -85,7 +85,9 @@ class BanksController extends BaseAdminController
             ])
         );
 
-        return redirect(route('admin.banks.index'))->with('status', 'Bank has been created.');
+        flash('Bank has been created.');
+
+        return redirect(route('admin.banks.index'));
     }
 
     // /**
@@ -147,7 +149,9 @@ class BanksController extends BaseAdminController
             ])
         )->save();
 
-        return redirect()->route('admin.banks.index')->with('status', 'Bank has been updated.');
+        flash('Bank has been updated.');
+
+        return redirect()->route('admin.banks.index');
     }
 
     /**
@@ -162,7 +166,9 @@ class BanksController extends BaseAdminController
 
         $bank->delete();
 
-        return redirect(route('admin.banks.index'))->with('status', 'Bank has been deleted.');
+        flash('Bank has been deleted.');
+
+        return redirect(route('admin.banks.index'));
     }
 
     /**
@@ -192,7 +198,9 @@ class BanksController extends BaseAdminController
 
         $profile->fill($request->only('annual_report', 'bio'))->save();
 
-        return back()->with('status', 'Bank profile has been updated.');
+        flash('Bank profile has been updated.');
+
+        return back();
     }
 
     /**

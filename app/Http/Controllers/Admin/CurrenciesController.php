@@ -61,7 +61,9 @@ class CurrenciesController extends BaseAdminController
             ])
         );
 
-        return redirect(route('admin.currencies.index'))->with('status', 'Currency has been created.');
+        flash('Currency has been created.');
+
+        return redirect(route('admin.currencies.index'));
     }
 
     // /**
@@ -110,7 +112,9 @@ class CurrenciesController extends BaseAdminController
             ])
         )->save();
 
-        return redirect()->route('admin.currencies.index')->with('status', 'Currency has been updated.');
+        flash('Currency has been updated.');
+
+        return redirect()->route('admin.currencies.index');
     }
 
     /**
@@ -125,7 +129,9 @@ class CurrenciesController extends BaseAdminController
 
         $currency->delete();
 
-        return redirect(route('admin.currencies.index'))->with('status', 'Currency has been deleted.');
+        flash('Currency has been deleted.');
+
+        return redirect(route('admin.currencies.index'));
     }
 
     /**
@@ -154,6 +160,8 @@ class CurrenciesController extends BaseAdminController
 
         $currency->toggleEnabled()->save();
 
-        return redirect(route('admin.currencies.index'))->with('status', 'Currency has been deleted.');
+        flash('Currency has been deleted.');
+
+        return redirect(route('admin.currencies.index'));
     }
 }

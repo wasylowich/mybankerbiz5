@@ -57,7 +57,9 @@ class PermissionsController extends BaseAdminController
 
         $permission->syncRoles($request->roles ?: []);
 
-        return redirect(route('admin.permissions.index'))->with('status', 'Permission has been created.');
+        flash('Permission has been created.');
+
+        return redirect(route('admin.permissions.index'));
     }
 
     // /**
@@ -102,7 +104,9 @@ class PermissionsController extends BaseAdminController
 
         $permission->syncRoles($request->roles ?: []);
 
-        return redirect()->route('admin.permissions.index')->with('status', 'Permission has been updated.');
+        flash('Permission has been updated.');
+
+        return redirect()->route('admin.permissions.index');
     }
 
     /**
@@ -117,6 +121,8 @@ class PermissionsController extends BaseAdminController
 
         $permission->delete();
 
-        return redirect(route('admin.permissions.index'))->with('status', 'Permission has been deleted.');
+        flash('Permission has been deleted.');
+
+        return redirect(route('admin.permissions.index'));
     }
 }
