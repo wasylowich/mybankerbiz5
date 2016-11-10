@@ -77,8 +77,8 @@
 
             <!-- User -->
             <li class="header">User</li>
-            <li><a href="{{ url('admin/users/profile') }}"><i class="fa fa-user"></i> Profile</a></li>
-            <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li class="{!! Request::is('admin/users/profile') ? 'active' : '' !!}"><a href="{{ url('admin/users/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+            <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
