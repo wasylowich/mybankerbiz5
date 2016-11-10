@@ -49,7 +49,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if (Auth::user()->hasAnyRole('sys-admin', 'admin')) {
-            return redirect('/home');
+            return redirect()->route('admin.dashboard');
         }
 
         if (Auth::user()->hasAnyRole('bidder')) {
@@ -59,5 +59,7 @@ class LoginController extends Controller
         if (Auth::user()->hasAnyRole('depositor')) {
             return redirect()->route('customer.dashboard');
         }
+
+        return redirect('/');
     }
 }

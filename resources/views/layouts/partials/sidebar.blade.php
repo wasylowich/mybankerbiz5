@@ -32,17 +32,10 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li class="{!! Request::is('home') ? 'active' : '' !!}"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                </ul>
-            </li>
+            <!-- Dashboard -->
+            <li class="{!! Request::is('admin/dashboard') ? 'active' : '' !!}"><a href="{{ url('admin/dashboard') }}"><i class='fa fa-tachometer'></i> <span>Dashboard</span></a></li>
 
+            <!-- Currencies -->
             <li class="treeview">
                 <a href="#"><i class="fa fa-money"></i> <span>Currencies</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -51,6 +44,7 @@
                 </ul>
             </li>
 
+            <!-- Countries -->
             <li class="treeview">
                 <a href="#"><i class="fa fa-flag"></i> <span>Countries</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -59,6 +53,7 @@
                 </ul>
             </li>
 
+            <!-- Banks & Resources -->
             <li class="treeview">
                 <a href="#"><i class="fa fa-bank"></i> <span>Banks & Resources</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -69,6 +64,7 @@
                 </ul>
             </li>
 
+            <!-- Users, Roles, Permissions -->
             <li class="treeview">
                 <a href="#"><i class="fa fa-group"></i> <span>Users, Roles, Permissions</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -79,6 +75,7 @@
                 </ul>
             </li>
 
+            <!-- User -->
             <li class="header">User</li>
             <li><a href="{{ url('admin/users/profile') }}"><i class="fa fa-user"></i> Profile</a></li>
             <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>

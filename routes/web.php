@@ -21,6 +21,9 @@ Route::get('/logout', 'Auth\LoginController@logout');
 // Admin Interface Routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function ()
 {
+    // Dashboard route
+    Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+
     // Country management routes
     Route::post('countries/{country}/toggleEnabled', ['as' => 'countries.toggleEnabled', 'uses' => 'CountriesController@toggleEnabled']);
     Route::get('countries/disabled', ['as' => 'countries.disabled', 'uses' => 'CountriesController@disabled']);

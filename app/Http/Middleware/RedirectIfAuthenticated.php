@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
 
             if (Auth::user()->hasAnyRole('sys-admin', 'admin')) {
-                return redirect('/home');
+                return redirect()->route('admin.dashboard');
             }
 
             if (Auth::user()->hasAnyRole('bidder')) {
@@ -31,7 +31,7 @@ class RedirectIfAuthenticated
                 return redirect()->route('customer.dashboard');
             }
 
-            return redirect('/home');
+            return redirect('/');
         }
 
         return $next($request);
