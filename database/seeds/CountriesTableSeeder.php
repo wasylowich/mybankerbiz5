@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 class CountriesTableSeeder extends Seeder
 {
+    // Taken from ISO-3166 standard
 
     public function run()
     {
@@ -24,7 +25,23 @@ class CountriesTableSeeder extends Seeder
                 'is_enabled'          => true,
                 'created_at'          => Carbon::now(),
                 'updated_at'          => Carbon::now(),
-                'deleted_at'          => null
+                'deleted_at'          => null,
+            ),
+
+            array(
+                'id'                  => 578,
+                'default_currency_id' => 578,
+                'name'                => 'Norway',
+                'local_short_form'    => 'Norge',
+                'abbreviation'        => '',
+                'iso_alpha_2'         => 'NO',
+                'iso_alpha_3'         => 'NOR',
+                'telephone_code'      => '47',
+                'tld'                 => '.no',
+                'is_enabled'          => true,
+                'created_at'          => Carbon::now(),
+                'updated_at'          => Carbon::now(),
+                'deleted_at'          => null,
             ),
 
             array(
@@ -40,7 +57,7 @@ class CountriesTableSeeder extends Seeder
                 'is_enabled'          => true,
                 'created_at'          => Carbon::now(),
                 'updated_at'          => Carbon::now(),
-                'deleted_at'          => null
+                'deleted_at'          => null,
             ),
 
             array(
@@ -56,7 +73,7 @@ class CountriesTableSeeder extends Seeder
                 'is_enabled'          => false,
                 'created_at'          => Carbon::now(),
                 'updated_at'          => Carbon::now(),
-                'deleted_at'          => null
+                'deleted_at'          => null,
             ),
         );
 

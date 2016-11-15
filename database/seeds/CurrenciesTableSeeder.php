@@ -5,12 +5,24 @@ use Illuminate\Database\Seeder;
 
 class CurrenciesTableSeeder extends Seeder
 {
+    // Taken from ISO-3166 standard
 
     public function run()
     {
         DB::table('currencies')->delete();
 
         $currencies = array(
+            array(
+                'id'         => 36,
+                'name'       => 'Australian Dollar',
+                'code'       => 'AUD',
+                'precision'  => 2,
+                'is_enabled' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null,
+            ),
+
             array(
                 'id'         => 208,
                 'name'       => 'Danish Krone',
@@ -37,6 +49,17 @@ class CurrenciesTableSeeder extends Seeder
                 'id'         => 752,
                 'name'       => 'Swedish Krone',
                 'code'       => 'SEK',
+                'precision'  => 2,
+                'is_enabled' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'deleted_at' => null,
+            ),
+
+            array(
+                'id'         => 756,
+                'name'       => 'Swiss Franc',
+                'code'       => 'CHF',
                 'precision'  => 2,
                 'is_enabled' => false,
                 'created_at' => Carbon::now(),

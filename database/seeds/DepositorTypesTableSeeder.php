@@ -5,14 +5,13 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-class DepositorProfilesTableSeeder extends Seeder
+class DepositorTypesTableSeeder extends Seeder
 {
     public function run()
     {
         $faker = Faker::create('da_DK');
 
         DB::table('depositor_types')->delete();
-        DB::table('depositor_profiles')->delete();
 
         $depositorTypes = array(
             array(
@@ -66,32 +65,5 @@ class DepositorProfilesTableSeeder extends Seeder
         );
 
         DB::table('depositor_types')->insert($depositorTypes);
-
-        $collDepositorTypes = collect($depositorTypes);
-
-        $depositorProfiles = [];
-
-        foreach (User::all() as $user) {
-            $depositorType = $collDepositorTypes->random(1);
-            $name          = $user->name . ' (' .$depositorType['name'] . ')';
-            $vatin         = null;
-            $pin           = $faker->cpr;
-
-            if (!in_array($depositorType['name'], ['personal', 'coop'])) {
-                $vatin = $faker->cvr;
-            }
-
-            $depositorProfiles[] = [
-                'user_id'           => $user->id,
-                'depositor_type_id' => $depositorType['id'],
-                'name'              => $name,
-                'vatin'             => $vatin,
-                'pin'               => $pin,
-                'is_primary'        => true,
-                'is_active'         => true,
-            ];
-        }
-
-        DB::table('depositor_profiles')->insert($depositorProfiles);
     }
 }
