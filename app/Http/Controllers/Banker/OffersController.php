@@ -79,7 +79,7 @@ class OffersController extends BaseBankerController
             'interest_term_id'       => $offerChance->bank->interest_term_id,
         ]);
 
-        $offerChance->accept();
+        $offerChance->accept()->save();
 
         return redirect(route('banker.offers.index'))->with('status', 'Offer has been created.');
     }
