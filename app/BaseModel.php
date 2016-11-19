@@ -9,6 +9,12 @@ class BaseModel extends Model
 {
     use SoftDeletes;
 
+    public function __construct() {
+        \Carbon\Carbon::setLocale('da');
+
+        Parent::__construct();
+    }
+
     public function getId()
     {
         return $this->id;

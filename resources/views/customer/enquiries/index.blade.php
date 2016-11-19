@@ -25,7 +25,7 @@
                 @foreach($enquiries as $enquiry)
                 <tr data-entry-id="{{ $enquiry->id }}">
                     <td>{{ $enquiry->depositorProfile->name }}</td>
-                    <td>TODO</td>
+                    <td>{{ $enquiry->offersDeadline }}</td>
                     <td>{{ $enquiry->amount }}</td>
                     <td>
                     @if ($enquiry->depositType->name === 'pension')

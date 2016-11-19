@@ -152,6 +152,20 @@ class Enquiry extends BaseModel
     */
 
     /**
+     * Get the offersDeadline of the enquiry
+     *
+     * @return string
+     */
+    public function getOffersDeadlineAttribute()
+    {
+        if ($this->bidding_deadline->isPast()) {
+            return $this->bidding_deadline->addDays(3)->diffForHumans();
+        }
+
+        return 'Auction ongoing';
+    }
+
+    /**
      * Get the status of the enquiry
      *
      * @return string

@@ -33,7 +33,7 @@ class EnquiriesController extends BaseCustomerController
      */
     public function index()
     {
-        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency', 'offers')->whereEnquirerId(Auth::user()->id)->get();
+        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency', 'offers', 'offerChances')->whereEnquirerId(Auth::user()->id)->get();
 
         return view('customer.enquiries.index', compact('enquiries'));
     }
@@ -64,7 +64,7 @@ class EnquiriesController extends BaseCustomerController
         $currency = Currency::findOrFail($request->currency_id);
 
         $enquiry = Auth::user()->enquiries()->create([
-            'bidding_deadline'           => Carbon::now()->addHours(26),
+            'bidding_deadline'           => substr(next_business_day(1, Carbon::now()->addHours(2))->toDateTimeString(), 0, 13) . ':00:00',
             'amount'                     => $request->amount * (10 ** $currency->precision),
             'fixation_period_start_date' => $request->deposit_type_id == EnumDepositType::PERIOD && !empty($request->fixation_period_start_date)
                                                 ? $request->fixation_period_start_date
