@@ -5,7 +5,10 @@
 @section('main-content')
     <h1>Dashboard for {{ Auth::user()->name }}</h1>
 
-    <p>Boilerplate text for the customer's dashboard</p>
+    <h3>Enquiries</h3>
+
+    <!-- Enquiries -->
+    <enquiries></enquiries>
 
     <h3>Depositor Profiles</h3>
 
@@ -14,4 +17,6 @@
         <li>{{ $depositorProfile->name }} | CPR: {{ $depositorProfile->pin }} | CVR: {{ $depositorProfile->vatin }} | Primary: {{ $depositorProfile->is_primary }}</li>
     @endforeach
     </ul>
+
+    <pre>{!! $enquiries !!}</pre>
 @endsection
