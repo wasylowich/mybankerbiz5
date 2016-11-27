@@ -3,12 +3,12 @@
         <div class="panel-heading" role="tab" :id="'heading-enquiry' + enquiry.id">
             <h4 class="panel-title">
                 <div class="row">
-                    <div class="col-sm-3">{{ enquiry.depositor_profile.name }}</div>
-                    <div class="col-sm-3">TODO: Deadline</div>
+                    <div class="col-sm-3">{{ enquiry.depositorProfile.name }}</div>
+                    <div class="col-sm-3">{{ enquiry.offers_deadline }}</div>
                     <div class="col-sm-2">{{ enquiry.amount }}</div>
-                    <div class="col-sm-2" v-if="enquiry.deposit_type.name === 'pension'">pension</div>
-                    <div class="col-sm-2" v-else>TODO: Fixation period days</div>
-                    <div class="col-sm-1">TODO: Count</div>
+                    <div class="col-sm-2" v-if="enquiry.depositType.name === 'pension'">pension</div>
+                    <div class="col-sm-2" v-else>{{ enquiry.fixation_period}} days</div>
+                    <div class="col-sm-1">{{ enquiry.offers.length }}</div>
                     <div class="col-sm-1">
                         <a class="collapsed btn btn-default btn-xs" role="button" data-toggle="collapse" data-parent="#enquiries-vue-component" :href="'#collapse-enquiry' + enquiry.id" aria-expanded="false" :aria-controls="'collapse-enquiry' + enquiry.id">
                             Show offers
@@ -20,8 +20,8 @@
 
         <!-- Output the list of offers and offer-chances -->
         <div :id="'collapse-enquiry' + enquiry.id" class="panel-collapse collapse" role="tabpanel" :aria-labelledby="'heading-enquiry' + enquiry.id">
-            <offers        :offers="enquiry.offers"              :showColHeadings="showColHeadingsOffers"></offers>
-            <offer-chances :offerChances="enquiry.offer_chances" :showColHeadings="showColHeadingsOfferChances"></offer-chances>
+            <offers        :offers="enquiry.offers"             :showColHeadings="showColHeadingsOffers"></offers>
+            <offer-chances :offerChances="enquiry.offerChances" :showColHeadings="showColHeadingsOfferChances"></offer-chances>
         </div>
     </div>
 </template>
@@ -40,7 +40,7 @@
             showColHeadingsOfferChances: function () {
                 // The offers component should show the column headings if
                 // there are no offers, but there is at least 1 offerChance
-                return this.enquiry.offers.length == 0 && this.enquiry.offer_chances.length > 0
+                return this.enquiry.offers.length == 0 && this.enquiry.offerChances.length > 0
             },
         },
 

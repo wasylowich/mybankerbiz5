@@ -17,6 +17,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/enquiries', function(Request $request) {
-    return $request->user()->enquiries()->with('depositorProfile', 'depositType', 'currency', 'offers.bank', 'offerChances.bank')->get();
-})->middleware('auth:api');
+Route::get('/enquiries', 'Api\Customer\EnquiriesController@index')->middleware('auth:api');

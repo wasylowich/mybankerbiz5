@@ -25,8 +25,7 @@ class DashboardController extends BaseCustomerController
     public function index()
     {
         $depositorProfiles = DepositorProfile::whereUserId(Auth::user()->id)->get();
-        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency', 'offers.bank', 'offerChances.bank')->whereEnquirerId(Auth::user()->id)->get();
 
-        return view('customer.dashboard.index', compact('depositorProfiles', 'enquiries'));
+        return view('customer.dashboard.index', compact('depositorProfiles'));
     }
 }

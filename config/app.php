@@ -173,6 +173,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Spatie\Fractal\FractalServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,6 +239,7 @@ return [
         'AdminLTE'     => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
         'Image'        => Intervention\Image\Facades\Image::class,
+        'Fractal'      => Spatie\Fractal\FractalFacade::class,
 
     ],
 
