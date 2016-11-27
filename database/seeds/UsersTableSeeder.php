@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
 
         // Attach 1 or more random depositorProfiles to the Customer
         $count = 1;
-        foreach (range(1, mt_rand(1, 3)) as $index) {
+        foreach (range(1, mt_rand(3, 5)) as $index) {
             $depositorType = $depositorTypes[mt_rand(0, $depositorTypesCount - 1)];
 
             $profile = [
@@ -117,7 +117,8 @@ class UsersTableSeeder extends Seeder
         }
 
         // Create some random customers
-        foreach (range(1, mt_rand(25, 100)) as $index) {
+        // foreach (range(1, mt_rand(25, 100)) as $index) {
+        foreach (range(1, mt_rand(1, 2)) as $index) {
             $user = User::create([
                 'bank_id'    => null,
                 'name'       => $faker->name,

@@ -14,6 +14,12 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('enquiry', require('./components/Enquiry.vue'));
+Vue.component('enquiries', require('./components/Enquiries.vue'));
+Vue.component('offer-chance', require('./components/OfferChance.vue'));
+Vue.component('offer-chances', require('./components/OfferChances.vue'));
+Vue.component('offer', require('./components/Offer.vue'));
+Vue.component('offers', require('./components/Offers.vue'));
 
 const app = new Vue({
     el: '#app'

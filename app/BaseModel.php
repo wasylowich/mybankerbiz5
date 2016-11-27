@@ -9,10 +9,10 @@ class BaseModel extends Model
 {
     use SoftDeletes;
 
-    public function __construct() {
+    public function __construct($attributes = array()) {
         \Carbon\Carbon::setLocale('da');
 
-        Parent::__construct();
+        Parent::__construct($attributes);
     }
 
     public function getId()

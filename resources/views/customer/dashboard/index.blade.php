@@ -3,9 +3,10 @@
 @section('contentheader_title', 'Dashboard')
 
 @section('main-content')
-    <h1>Dashboard for {{ Auth::user()->name }}</h1>
+    <h3>Enquiries</h3>
 
-    <p>Boilerplate text for the customer's dashboard</p>
+    <!-- Enquiries -->
+    <enquiries></enquiries>
 
     <h3>Depositor Profiles</h3>
 

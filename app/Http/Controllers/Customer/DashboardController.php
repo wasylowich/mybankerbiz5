@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Mybankerbiz\DepositorProfile;
+use Mybankerbiz\Enquiry;
 use Mybankerbiz\Http\Requests;
 // use Mybankerbiz\Http\Controllers\Controller;
 
