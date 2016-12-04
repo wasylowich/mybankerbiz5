@@ -9,7 +9,7 @@
                 <div class="col-sm-1"><strong>Offers</strong></div>
                 <div class="col-sm-1"></div>
             </div>
-            <enquiry :enquiry="enquiry" v-for="enquiry in enquiries"></enquiry>
+            <enquiry :csrf_token="csrf_token" :enquiry="enquiry" v-for="enquiry in enquiries"></enquiry>
         </div>
 
         <div v-else>
@@ -20,6 +20,8 @@
 
 <script>
     export default {
+        props: ['csrf_token'],
+
         data () {
             return {
                 enquiries: [],

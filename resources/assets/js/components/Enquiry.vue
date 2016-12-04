@@ -20,15 +20,15 @@
 
         <!-- Output the list of offers and offer-chances -->
         <div :id="'collapse-enquiry' + enquiry.id" class="panel-collapse collapse" role="tabpanel" :aria-labelledby="'heading-enquiry' + enquiry.id">
-            <offers        :offers="enquiry.offers"             :showColHeadings="showColHeadingsOffers"></offers>
-            <offer-chances :offerChances="enquiry.offerChances" :showColHeadings="showColHeadingsOfferChances"></offer-chances>
+            <offers        :csrf_token="csrf_token" :enquiry="baseEnquiry" :offers="enquiry.offers"             :showColHeadings="showColHeadingsOffers"></offers>
+            <offer-chances :csrf_token="csrf_token" :enquiry="baseEnquiry" :offerChances="enquiry.offerChances" :showColHeadings="showColHeadingsOfferChances"></offer-chances>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['enquiry'],
+        props: ['csrf_token', 'enquiry'],
 
         computed: {
             showColHeadingsOffers: function () {
@@ -41,6 +41,15 @@
                 // The offers component should show the column headings if
                 // there are no offers, but there is at least 1 offerChance
                 return this.enquiry.offers.length == 0 && this.enquiry.offerChances.length > 0
+            },
+
+            baseEnquiry: function () {
+                var baseEnquiry = JSON.parse(JSON.stringify(this.enquiry))
+
+                delete baseEnquiry.offerChances
+                delete baseEnquiry.offers
+
+                return baseEnquiry
             },
         },
 

@@ -80,6 +80,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'Custo
 
     // Offers routes
     Route::get('offers/{offer}/accept', ['as' => 'offers.accept', 'uses' => 'OffersController@accept']);
+    Route::post('offers/{offer}/accept', ['as' => 'offers.accept', 'uses' => 'OffersController@accept']);
     Route::post('offers/{offer}/reject', ['as' => 'offers.reject', 'uses' => 'OffersController@reject']);
     Route::resource('offers', 'OffersController', ['only' => ['index']]);
 });

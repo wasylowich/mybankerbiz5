@@ -10,12 +10,12 @@
         </div>
 
         <!-- Output the list of offer-chances -->
-        <offer-chance :offerChance="offerChance" v-for="offerChance in offerChances" v-if="offerChance.state != 'accepted'"></offer-chance>
+        <offer-chance :enquiry="enquiry" :offerChance="offerChance" v-for="offerChance in offerChances" v-if="offerChance.state != 'accepted'"></offer-chance>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['offerChances', 'showColHeadings'],
+        props: ['enquiry', 'offerChances', 'showColHeadings'],
     }
 </script>

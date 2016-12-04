@@ -18,6 +18,6 @@
 
 <script>
     export default {
-        props: ['offerChance'],
+        props: ['enquiry', 'offerChance'],
     }
 </script>

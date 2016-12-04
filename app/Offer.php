@@ -212,6 +212,17 @@ class Offer extends BaseModel
         return $this->belongsTo(InterestTerm::class);
     }
 
+    /**
+     * One-to-one relation with the User model.
+     * Return the user that the offer was given to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offersGiven()
+    {
+        return $this->belongsTo(Offer::class, 'bidder_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Section for: Scopes

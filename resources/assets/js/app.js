@@ -20,6 +20,8 @@ Vue.component('offer-chance', require('./components/OfferChance.vue'));
 Vue.component('offer-chances', require('./components/OfferChances.vue'));
 Vue.component('offer', require('./components/Offer.vue'));
 Vue.component('offers', require('./components/Offers.vue'));
+Vue.component('mbbiz-offer-details', require('./components/MbBizOfferDetails.vue'));
+Vue.component('mbbiz-bank-details', require('./components/MbBizBankDetails.vue'));
 
 const app = new Vue({
     el: '#app'

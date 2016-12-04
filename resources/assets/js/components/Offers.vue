@@ -10,12 +10,12 @@
         </div>
 
         <!-- Output the list of offers -->
-        <offer :offer="offer" v-for="offer in offers"></offer>
+        <offer :csrf_token="csrf_token" :enquiry="enquiry" :offer="offer" v-for="offer in offers"></offer>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['offers', 'showColHeadings'],
+        props: ['csrf_token', 'enquiry', 'offers', 'showColHeadings'],
     }
 </script>

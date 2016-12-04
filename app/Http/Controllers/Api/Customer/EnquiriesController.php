@@ -34,13 +34,15 @@ class EnquiriesController extends BaseApiCustomerController
      */
     public function index()
     {
-        $enquiries = Enquiry::with(
+        $enquiries = Enquiry::with([
                 'depositorProfile',
                 'depositType',
                 'currency',
-                'offers.bank',
-                'offerChances.bank'
-            )
+                'offers.bank.interestConvention',
+                'offers.bank.profile',
+                // 'offerChances.bank.interestConvention',
+                // 'offerChances.bank.profile',
+            ])
             ->whereEnquirerId(Auth::user()->id)
             ->get();
 

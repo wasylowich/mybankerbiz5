@@ -11,15 +11,19 @@ class BankTransformer extends Fractal\TransformerAbstract
      *
      * @var array
      */
-    protected $defaultIncludes = [];
+    protected $defaultIncludes = [
+        'profile'
+    ];
 
     public function transform(Bank $bank)
     {
         return [
-            'id'        => (int) $bank->id,
-            'name'      => $bank->name,
-            'website'   => $bank->website,
-            'is_active' => $bank->is_active,
+            'id'                  => (int) $bank->id,
+            'name'                => $bank->name,
+            'logo'                => $bank->logo(),
+            'interest_convention' => $bank->interestConvention->convention,
+            'website'             => $bank->website,
+            'is_active'           => $bank->is_active,
 
             // 'links'   => [
             //     [
@@ -28,5 +32,18 @@ class BankTransformer extends Fractal\TransformerAbstract
             //     ]
             // ],
         ];
+    }
+
+    /**
+     * Include Profile
+     *
+     * @param Bank $bank
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeProfile(Bank $bank)
+    {
+        $profile = $bank->profile;
+
+        return $this->item($profile, new BankProfileTransformer);
     }
 }

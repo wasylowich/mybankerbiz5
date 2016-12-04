@@ -6,7 +6,7 @@
     <h3>Enquiries</h3>
 
     <!-- Enquiries -->
-    <enquiries></enquiries>
+    <enquiries csrf_token="{{ csrf_token() }}"></enquiries>
 
     <h3>Depositor Profiles</h3>
 

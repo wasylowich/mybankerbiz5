@@ -22,6 +22,7 @@ class OfferTransformer extends Fractal\TransformerAbstract
             'state'    => $offer->state,
             'interest' => $offer->interest,
             'amount'   => $offer->amount,
+            'deadline' => $offer->deadline,
 
             'links'   => [
                 [
