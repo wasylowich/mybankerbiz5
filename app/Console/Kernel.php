@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ArchiveExpiredEnquiries::class,
+        Commands\ArchiveExpiredOffers::class
     ];
 
     /**
@@ -24,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('mybankerbiz:archive:enquiries')
+                 ->hourly();
+
+        $schedule->command('mybankerbiz:archive:offers')
+                 ->hourly();
     }
 
     /**

@@ -18,6 +18,8 @@ class Offer extends BaseModel
      */
     protected $fillable = [
         'state',
+        'deadline',
+        'fixation_period_months',
         'interest',
         'amount',
         'bank_id',
@@ -58,6 +60,42 @@ class Offer extends BaseModel
     | Define all custom methods for the model here
     |
     */
+
+    /**
+     * Marks the offer as archived
+     *
+     * @param  Mybankerbiz\User|string $archiver Indicates who/what performed the archiving
+     * @return Mybankerbiz\Offer
+     */
+    public function archive($archiver)
+    {
+        if (is_a($archiver, User::class)) {
+            // Archiver is a user, so get the role
+            if (Auth::user()->hasAnyRole('sys-admin', 'admin')) {
+                $archiver_role = 'admin';
+            } elseif (Auth::user()->hasAnyRole('bidder')) {
+                $archiver_role = 'bidder';
+            } elseif (Auth::user()->hasAnyRole('depositor')) {
+                $archiver_role = 'depositor';
+            }
+
+            $archiver_id = $archiver->id;
+        } else {
+            // Archiver is a system cron
+            $archiver_role = $archiver;
+            $archiver_id   = null;
+        }
+
+        // Set the pertinent archiving attributes on the offer object
+        $this->archived_at   = \Carbon\Carbon::now();
+        $this->archiver_role = $archiver_role;
+        $this->archiver_id   = $archiver_id;
+
+        // Once archived, an offer cannot be active.
+        $this->state         = 'archived';
+
+        return $this;
+    }
 
     /**
      * Updates the state of the Offer to 'accepted' in storage

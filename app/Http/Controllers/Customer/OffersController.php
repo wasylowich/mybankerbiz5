@@ -23,7 +23,8 @@ class OffersController extends BaseCustomerController
      */
     public function index()
     {
-        $offers = Offer::with('enquiry.depositType')->get();
+        // $offers = Offer::with('enquiry.depositType')->get();
+        $offers = Auth::user()->offersReceived()->with('enquiry.depositType', 'enquiry.currency', 'bank')->get();
 
         return view('customer.offers.index', compact('offers'));
     }

@@ -24,12 +24,19 @@ class EnquiryTransformer extends Fractal\TransformerAbstract
 
     public function transform(Enquiry $enquiry)
     {
+        $fixationStart = ! is_null($enquiry->fixation_period_start_date)
+                            ? $enquiry->fixation_period_start_date->toDateString()
+                            : null;
+
+        $fixationEnd   = ! is_null($enquiry->fixation_period_end_date)
+                            ? $enquiry->fixation_period_end_date->toDateString()
+                            : null;
         return [
             'id'                         => (int) $enquiry->id,
             'bidding_deadline'           => $enquiry->bidding_deadline->toDateString(),
             'amount'                     => (int) $enquiry->amount,
-            'fixation_period_start_date' => $enquiry->fixation_period_start_date->toDateString(),
-            'fixation_period_end_date'   => $enquiry->fixation_period_end_date->toDateString(),
+            'fixation_period_start_date' => $fixationStart,
+            'fixation_period_end_date'   => $fixationEnd,
             'is_active'                  => $enquiry->is_active,
             'status'                     => $enquiry->status,
             'offers_deadline'            => $enquiry->offers_deadline,

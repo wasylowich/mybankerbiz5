@@ -44,6 +44,12 @@ class EnquiriesController extends BaseApiCustomerController
             ->whereEnquirerId(Auth::user()->id)
             ->get();
 
+        // return $enquiries;
+
+        // $enquiries = Auth::user()->enquiries()
+        //                 ->with('depositorProfile', 'depositType', 'currency', 'offers.bank', 'offerChances.bank')
+        //                 ->get();
+
         return fractal()
             ->collection($enquiries, new EnquiryTransformer())
             ->serializeWith(new \Spatie\Fractal\ArraySerializer());

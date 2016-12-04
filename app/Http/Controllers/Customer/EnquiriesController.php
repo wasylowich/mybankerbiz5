@@ -14,6 +14,7 @@ use Mybankerbiz\Enquiry;
 use Mybankerbiz\Enumerations\EnumDepositType;
 use Mybankerbiz\Http\Requests;
 use Mybankerbiz\Http\Requests\Customer\EnquiryRequest;
+use Mybankerbiz\Events\Customer\EnquiryWasCreated;
 // use Mybankerbiz\Http\Controllers\Controller;
 
 class EnquiriesController extends BaseCustomerController
@@ -33,7 +34,9 @@ class EnquiriesController extends BaseCustomerController
      */
     public function index()
     {
-        $enquiries = Enquiry::with('depositorProfile', 'depositType', 'currency', 'offers', 'offerChances')->whereEnquirerId(Auth::user()->id)->get();
+        $enquiries = Auth::user()->enquiries()
+                        ->with('depositorProfile', 'depositType', 'currency', 'offers.bank', 'offerChances.bank')
+                        ->get();
 
         return view('customer.enquiries.index', compact('enquiries'));
     }
@@ -63,20 +66,36 @@ class EnquiriesController extends BaseCustomerController
     {
         $currency = Currency::findOrFail($request->currency_id);
 
+        // Calculate the bidding deadline taking business days into account
+        $buddingDeadlineTimestamp = next_business_day(1, Carbon::now()->addHours(2))->toDateTimeString();
+        $biddingDeadline = substr($buddingDeadlineTimestamp, 0, 13) . ':00:00';
+
+        // Calculate the amount to persist using the currency's precision
+        $amount = $request->amount * (10 ** $currency->precision);
+
+        // Calculate the fixation period start date
+        $fixationStart = $request->deposit_type_id == EnumDepositType::PERIOD && !empty($request->fixation_period_start_date)
+                            ? $request->fixation_period_start_date
+                            : null;
+
+        // Calculate the fixation period end date
+        $fixationEnd = $request->deposit_type_id == EnumDepositType::PERIOD && !empty($request->fixation_period_end_date)
+                            ? $request->fixation_period_end_date
+                            : null;
+
         $enquiry = Auth::user()->enquiries()->create([
-            'bidding_deadline'           => substr(next_business_day(1, Carbon::now()->addHours(2))->toDateTimeString(), 0, 13) . ':00:00',
-            'amount'                     => $request->amount * (10 ** $currency->precision),
-            'fixation_period_start_date' => $request->deposit_type_id == EnumDepositType::PERIOD && !empty($request->fixation_period_start_date)
-                                                ? $request->fixation_period_start_date
-                                                : null,
-            'fixation_period_end_date'   => $request->deposit_type_id == EnumDepositType::PERIOD && !empty($request->fixation_period_end_date)
-                                                ? $request->fixation_period_end_date
-                                                : null,
+            'bidding_deadline'           => $biddingDeadline,
+            'amount'                     => $amount,
+            'fixation_period_start_date' => $fixationStart,
+            'fixation_period_end_date'   => $fixationEnd,
             // 'is_active'                  => $request->is_active,
             'depositor_profile_id'       => $request->depositor_profile_id,
             'deposit_type_id'            => $request->deposit_type_id,
             'currency_id'                => $request->currency_id,
         ]);
+
+        // Fire an event indicating that an Enquiry was created
+        event(new EnquiryWasCreated($enquiry, Auth::user()));
 
         return redirect(route('customer.enquiries.index'))->with('status', 'Enquiry has been created.');
     }

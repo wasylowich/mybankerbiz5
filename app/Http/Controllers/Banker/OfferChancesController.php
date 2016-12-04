@@ -23,11 +23,14 @@ class OfferChancesController extends BaseBankerController
      */
     public function index()
     {
-        // TODO: Improve this query (use scopes, or repository or query object)
-        $offerChances = OfferChance::with('enquiry.depositType')
-                                    ->whereState('under_consideration')
-                                    ->whereBankId(Auth::user()->bank_id)
-                                    ->get();
+        // TODO: Improve this query? (possibly use scopes, or repository or query object)
+        $offerChances = Auth::user()
+                    ->bank()
+                    ->firstOrFail()
+                    ->offerChances()
+                    ->with('enquiry.depositType')
+                    ->whereState('under_consideration')
+                    ->get();
 
         return view('banker.offerChances.index', compact('offerChances'));
     }

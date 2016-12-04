@@ -28,7 +28,12 @@ class OffersController extends BaseBankerController
      */
     public function index()
     {
-        $offers = Offer::with('enquiry.depositType')->whereBankId(Auth::user()->bank_id)->get();
+        // $offers = Offer::with('enquiry.depositType')->whereBankId(Auth::user()->bank_id)->get();
+
+        $offers = Auth::user()
+                    ->offers()
+                    ->with('enquiry.depositType')
+                    ->get();
 
         return view('banker.offers.index', compact('offers'));
     }
@@ -43,7 +48,8 @@ class OffersController extends BaseBankerController
     public function create(Request $request, Offer $offer)
     {
         // $id = $request->get('offerChance');
-        $offerChance = OfferChance::with('bank', 'enquiry.currency')->findOrFail($request->offerChance);
+        $offerChance = OfferChance::with('bank', 'enquiry.currency', 'enquiry.depositorProfile.depositorType')
+                            ->findOrFail($request->offerChance);
 
         $interestConventions = InterestConvention::all();
         $interestTerms       = InterestTerm::all();
@@ -61,13 +67,11 @@ class OffersController extends BaseBankerController
     {
         $offerChance = OfferChance::with('bank')->findOrFail($request->offer_chance_id);
         $enquiry     = Enquiry::with('currency')->findOrFail($offerChance->enquiry_id);
-// dd('store', $request->all(), $offerChance->toArray(), $enquiry->toArray());
-
-        // $enquiry     = Enquiry::with('currency')->findOrFail($request->enquiry_id);
-        // $offerChance = OfferChance::findOrFail($enquiry->offer_chance_id);
 
         $offer = Auth::user()->offers()->create([
             'state'                  => 'active',
+            'fixation_period_months' => $request->fixation_period_months,
+            'deadline'               => $request->deadline,
             'interest'               => $request->interest,
             'amount'                 => $enquiry->amount * $request->interest,
             'bank_id'                => $offerChance->bank_id,
@@ -79,6 +83,7 @@ class OffersController extends BaseBankerController
             'interest_term_id'       => $offerChance->bank->interest_term_id,
         ]);
 
+        // Update the state of the offerChance to 'accepted'
         $offerChance->accept()->save();
 
         return redirect(route('banker.offers.index'))->with('status', 'Offer has been created.');

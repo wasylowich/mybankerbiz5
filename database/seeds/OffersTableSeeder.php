@@ -23,8 +23,13 @@ class OffersTableSeeder extends Seeder
                 $makeAnOffer = $faker->boolean(50);
 
                 if ($makeAnOffer && $bank->users->count()) {
-                    $interest = round(mt_rand(50, 5000) / 1000, 3);
-                    $amount   = $offerChance->enquiry->amount * $interest;
+                    $fixationPeriodMonths = $offerChance->enquiry->deposit_type_id == 1 // Period
+                                        ? 24
+                                        : null;
+
+                    $deadline             = Carbon::now()->addDays(5);
+                    $interest             = round(mt_rand(50, 5000) / 1000, 3);
+                    $amount               = $offerChance->enquiry->amount * $interest;
 
                     $offers[] = [
                         'bank_id'                => $bank->id,
@@ -34,6 +39,8 @@ class OffersTableSeeder extends Seeder
                         'offer_chance_id'        => $offerChance->id,
                         'interest_convention_id' => $bank->interest_convention_id,
                         'interest_term_id'       => $bank->interest_term_id,
+                        'fixation_period_months' => $fixationPeriodMonths,
+                        'deadline'               => $deadline,
                         'interest'               => $interest,
                         'amount'                 => $amount,
                         'state'                  => 'active',

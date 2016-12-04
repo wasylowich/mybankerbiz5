@@ -89,6 +89,16 @@ class User extends BaseModel implements
     */
 
     /**
+     * One-to-one relation with the Bank model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
+
+    /**
      * One-to-one relation with the UserProfile model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -118,15 +128,15 @@ class User extends BaseModel implements
         return $this->hasMany(Enquiry::class, 'enquirer_id');
     }
 
-    /**
-     * One-to-many relation with the OfferChance model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function offerChances()
-    {
-        return $this->hasMany(OfferChance::class, 'bidder_id');
-    }
+    // /**
+    //  * One-to-many relation with the OfferChance model.
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function offerChances()
+    // {
+    //     return $this->hasMany(OfferChance::class, 'bidder_id');
+    // }
 
     /**
      * One-to-many relation with the Offer model.
@@ -136,6 +146,28 @@ class User extends BaseModel implements
     public function offers()
     {
         return $this->hasMany(Offer::class, 'bidder_id');
+    }
+
+    /**
+     * One-to-many relation with the Offer model.
+     * For users who are bankers, return all offers given by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offersGiven()
+    {
+        return $this->hasMany(Offer::class, 'bidder_id');
+    }
+
+    /**
+     * One-to-many relation with the Offer model through the Enquiry model.
+     * For users who are customers, return all offers received through enquiries.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function offersReceived()
+    {
+        return $this->hasManyThrough(Offer::class, Enquiry::class, 'enquirer_id');
     }
 
     /*

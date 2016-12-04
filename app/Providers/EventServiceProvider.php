@@ -13,8 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Mybankerbiz\Events\SomeEvent' => [
-            'Mybankerbiz\Listeners\EventListener',
+        'Mybankerbiz\Events\Customer\EnquiryWasCreated' => [
+            'Mybankerbiz\Listeners\Customer\GenerateOfferChances',
+            'Mybankerbiz\Listeners\Customer\SendEnquiryConfirmation',
+        ],
+        'Mybankerbiz\Events\Banker\OfferChanceWasCreated' => [
+            'Mybankerbiz\Listeners\Banker\SendOfferChanceNotification',
         ],
     ];
 

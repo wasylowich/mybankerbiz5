@@ -136,7 +136,7 @@ class BanksTableSeeder extends Seeder
                 'website'                        => 'www.' . $faker->domainName,
                 'change_of_control'              => $faker->boolean(50),
                 'rebate_message'                 => $faker->paragraph(3),
-                'is_active'                      => $faker->boolean(50),
+                'is_active'                      => true, // We want this bank to always be active for our seed data
                 'created_at'                     => Carbon::now(),
                 'updated_at'                     => Carbon::now()
             ),

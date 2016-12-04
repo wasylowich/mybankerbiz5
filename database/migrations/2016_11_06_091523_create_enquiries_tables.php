@@ -31,6 +31,10 @@ class CreateEnquiriesTables extends Migration
             $table->date('fixation_period_end_date')->nullable();
             $table->boolean('is_active')->default(true);
 
+            $table->timestamp('archived_at')->nullable();
+            $table->string('archiver_role', 255)->nullable();
+            $table->integer('archiver_id')->unsigned()->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
@@ -38,6 +42,7 @@ class CreateEnquiriesTables extends Migration
             $table->foreign('depositor_profile_id')->references('id')->on('depositor_profiles');
             $table->foreign('deposit_type_id')->references('id')->on('deposit_types');
             $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('archiver_id')->references('id')->on('users');
         });
     }
 
