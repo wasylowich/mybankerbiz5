@@ -31,8 +31,8 @@ class PeriodEnquiryConfirmation extends Mailable
      */
     public function build()
     {
-        // return $this->view('emails.customer.enquiryPeriodConfirmation');
-        return $this->text('emails.customer.enquiryPeriodConfirmation_plain')
+        return $this->view('emails.customer.enquiryPeriodConfirmation')
+                    ->text('emails.customer.enquiryPeriodConfirmation_plain')
                     ->with([
                         'userName'                => $this->enquirer->name,
                         'amount'                  => $this->enquiry->amount,

@@ -45,8 +45,8 @@ class PensionEnquiryConfirmation extends Mailable
      */
     public function build()
     {
-        // return $this->view('emails.customer.enquiryPensionConfirmation');
-        return $this->text('emails.customer.enquiryPensionConfirmation_plain')
+        return $this->view('emails.customer.enquiryPensionConfirmation')
+                    ->text('emails.customer.enquiryPensionConfirmation_plain')
                     ->with([
                         'userName'        => $this->enquirer->name,
                         'amount'          => $this->enquiry->amount,
